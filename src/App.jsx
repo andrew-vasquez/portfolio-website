@@ -1,6 +1,7 @@
 import About from "./components/About.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Name from "./components/Name.jsx";
+import Projects from "./components/Projects.jsx";
 function App() {
   return (
     <>
@@ -11,6 +12,7 @@ function App() {
         </header>
         <main>
           <About />
+          <Projects />
         </main>
       </div>
     </>

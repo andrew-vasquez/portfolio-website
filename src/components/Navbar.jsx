@@ -5,7 +5,9 @@ import Signature from "../assets/signature-white.png"
 function Header() {
   return (
     <nav className="w-full flex justify-between items-center">
-      <img className="w-44 " src={Signature} alt="Cursive writing with initials A & V" />
+      <img className="w-52" src={Signature} alt="Cursive writing with initials A & V" />
+
+    
       <div className="flex gap-2 items-center">
         <a target="_blank" href="mailto:andrewvasquez314@gmail.com"></a>
         <a
