@@ -1,10 +1,11 @@
 import GithubLogo from "../assets/icons/github.svg"
 import LinkedinLogo from "../assets/icons/linkedin.svg"
+import Signature from "../assets/signature-white.png"
 
 function Header() {
   return (
     <nav className="w-full flex justify-between items-center">
-      <span className="text-3xl">Andrew Vasquez</span>
+      <img className="w-44 " src={Signature} alt="Cursive writing with initials A & V" />
       <div className="flex gap-2 items-center">
         <a target="_blank" href="mailto:andrewvasquez314@gmail.com"></a>
         <a

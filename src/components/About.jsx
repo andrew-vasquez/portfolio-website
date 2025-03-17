@@ -1,7 +1,9 @@
 function About(){
 
     return(
-      <p></p>
+      <section className="my-20">
+
+      </section>
     );
 }
 
