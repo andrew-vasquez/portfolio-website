@@ -1,9 +1,7 @@
 function About(){
 
     return(
-        <header>
-            <h1>test!</h1>
-        </header>
+      <p></p>
     );
 }
 
