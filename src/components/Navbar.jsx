@@ -2,7 +2,7 @@ import GithubLogo from "../assets/icons/github.svg"
 import LinkedinLogo from "../assets/icons/linkedin.svg"
 import Signature from "../assets/signature-white.png"
 
-function Header() {
+const Header = () =>{
   return (
     <nav className="w-full flex justify-between items-center">
       <img className="w-52" src={Signature} alt="Cursive writing with initials A & V" />

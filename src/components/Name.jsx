@@ -1,4 +1,4 @@
-function Name() {
+const Name = () =>{
   return (
     <>
       <div className="flex flex-col items-center justify-center mt-20 mb-16">

@@ -1,4 +1,4 @@
-function Projects(){
+const Projects = () =>{
 
     return(
       <section className="my-20">
