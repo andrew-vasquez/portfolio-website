@@ -2,6 +2,7 @@ import About from "./components/About.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Name from "./components/Name.jsx";
 import Projects from "./components/Projects.jsx";
+import Footer from "./components/Footer.jsx";
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
           <About />
           <Projects />
         </main>
+          <Footer />
       </div>
     </>
   );
