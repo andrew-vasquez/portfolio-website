@@ -1,13 +1,15 @@
 const Footer = () => {
   return (
+    <>
+    <hr className="mb-4 border-zinc-600" />
     <div className="footer sm:footer-horizontal footer-center  text-base-content p-4">
           <aside>
             <p>
-              Copyright © {new Date().getFullYear()} - All right reserved by
-              Andrew Vasquez
+              Andrew Vasquez {new Date().getFullYear()}
             </p>
           </aside>
         </div>
+    </>
   );
 }
 

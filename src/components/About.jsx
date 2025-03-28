@@ -2,10 +2,12 @@ const About = () => {
 
     return(
       <section className="my-20">
-        <h2 className="text-2xl font-bold ">About Me</h2>
-        <p className="text-xl leading-8 mt-4 text-pretty">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus in reiciendis, quis obcaecati quidem provident ipsa, delectus laboriosam nobis ullam natus exercitationem culpa aspernatur. Nemo corporis ab vero perspiciatis exercitationem? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate libero sint ad iure voluptates cum a dolor necessitatibus aspernatur velit. Tempore modi at delectus sit, animi officia quia placeat ullam.
+        <h2 className="text-2xl font-bold pb-3 ">About Me</h2>
+        <hr className="mb-4 border-zinc-600" />
+        <p className="text-lg leading-8 mt-4 text-pretty text-zinc-400">
+       Currently a student at <strong className="font-medium text-zinc-100">Western Governors University</strong> pursuing a degree in <strong className="font-medium text-zinc-100">Software Engineering</strong>. I have a passion for learning and building applications that solve real-world problems. I enjoy working with modern web technologies and am always looking to expand my skill set.
         </p>
+    
       </section>
     );
 }
