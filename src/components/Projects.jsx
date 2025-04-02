@@ -1,7 +1,7 @@
 const Projects = () => {
   return (
-    <section className="my-20 flex">
-      <h2 className="text-2xl font-bold ">Projects</h2>
+    <section className="my-20">
+      <h2 className="text-2xl font-bold pb-1">Projects</h2>
       <hr className="mb-4 border-zinc-600" />
       <div className="card bg-base-100 w-96 shadow-sm">
         <figure className=" pt-20 ">
