@@ -5,7 +5,7 @@ import Signature from "../assets/signature-white.png"
 const Header = () =>{
   return (
     <nav className="w-full flex justify-between items-center">
-      <img className="w-52" src={Signature} alt="Cursive writing with initials A & V" />
+      <img className="w-52 pr-5" src={Signature} alt="Cursive writing with initials A & V" />
 
     
       <div className="flex gap-2 items-center">
@@ -13,7 +13,7 @@ const Header = () =>{
         <a
           className="w-12 hover:bg-zinc-900 hover:border-zinc-500 p-2 rounded-md border border-transparent transition"
           target="_blank"
-          href="https://github.com/Allials"
+          href="https://github.com/andrew-vasquez"
         >
         <img src={GithubLogo} alt="Github Logo" />
         </a>

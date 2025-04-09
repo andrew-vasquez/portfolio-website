@@ -19,8 +19,10 @@ export default [
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      'react-compiler': reactCompiler,
     },
     rules: {
+      'react-compiler/react-compiler': 'error',
       ...js.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
