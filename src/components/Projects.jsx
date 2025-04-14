@@ -11,7 +11,7 @@ const Projects = () => {
         <div className="card-body">
           <h2 className="card-title">Project 1 </h2>
           <p>
-            Description of Project 1. Lorem ipsum dolor sit amet consectetur
+            Coming Soon!
           </p>
           <div className="card-actions">
           </div>
