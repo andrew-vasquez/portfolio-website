@@ -7,6 +7,8 @@ import tailwindLogo from "../assets/icons/tailwind.svg"
 import github from "../assets/icons/github.svg"
 import git from "../assets/icons/git.svg"  
 import vscode from "../assets/icons/vscode.svg"
+import node from "../assets/icons/nodejs.svg"
+import python from "../assets/icons/python.svg"
 const Skills = () => {
   return (
     <>
@@ -22,7 +24,11 @@ const Skills = () => {
                 <Icons name="React" image={reactLogo} />
                 <Icons name="Tailwind" image={tailwindLogo} />
             </div>
-
+         <h3 className="text-xl font-medium pt-3 pb-5">Back-End</h3>
+         <div className="flex flex-wrap gap-5">
+          <Icons name="Node.js" image={node} />
+          <Icons name="Python" image={python} />
+         </div>
         <h3 className="text-xl font-medium mt-6 mb-4">Tools</h3>
             <div className="flex flex-wrap gap-5">
             <Icons name="Git" image={git} />
