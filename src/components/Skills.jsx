@@ -9,6 +9,7 @@ import git from "../assets/icons/git.svg"
 import vscode from "../assets/icons/vscode.svg"
 import node from "../assets/icons/nodejs.svg"
 import python from "../assets/icons/python.svg"
+import typescript from "../assets/icons/typescript.svg"
 const Skills = () => {
   return (
     <>
@@ -22,6 +23,7 @@ const Skills = () => {
                <Icons name="CSS" image={cssLogo} />
                 <Icons name="JavaScript" image={jsLogo} />
                 <Icons name="React" image={reactLogo} />
+                <Icons name="TypeScript" image={typescript} />
                 <Icons name="Tailwind" image={tailwindLogo} />
             </div>
          <h3 className="text-xl font-medium pt-3 pb-5">Back-End</h3>
