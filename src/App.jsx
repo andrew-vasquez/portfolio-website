@@ -7,7 +7,7 @@ import Skills from "./components/Skills.jsx";
 function App() {
   return (
     <>
-      <div className="min-w-[535px] max-w-screen-sm mx-auto py-16 px-8 selection:bg-gray-600 selection:text-white">
+      <div className="w-full max-w-2xl mx-auto py-8 px-4 sm:py-16 sm:px-8 selection:bg-gray-600 selection:text-white">
         <header>
           <Navbar />
           <Name />

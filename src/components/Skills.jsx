@@ -13,12 +13,12 @@ import typescript from "../assets/icons/typescript.svg"
 const Skills = () => {
   return (
     <>
-      <section className="my-20">
-    <h2 className="text-2xl font-semibold mb-1">Skills</h2>
+      <section className="my-12 sm:my-20">
+    <h2 className="text-xl sm:text-2xl font-semibold mb-1">Skills</h2>
     <hr className="mb-4 border-zinc-600" />
 
-       <h3 className="text-xl font-medium pt-3 pb-5">Front-End</h3>
-            <div className="flex flex-wrap gap-5">
+       <h3 className="text-lg sm:text-xl font-medium pt-3 pb-4 sm:pb-5">Front-End</h3>
+            <div className="flex flex-wrap gap-3 sm:gap-5">
                <Icons name="HTML" image={htmlLogo} />
                <Icons name="CSS" image={cssLogo} />
                 <Icons name="JavaScript" image={jsLogo} />
@@ -26,13 +26,13 @@ const Skills = () => {
                 <Icons name="TypeScript" image={typescript} />
                 <Icons name="Tailwind" image={tailwindLogo} />
             </div>
-         <h3 className="text-xl font-medium pt-3 pb-5">Back-End</h3>
-         <div className="flex flex-wrap gap-5">
+         <h3 className="text-lg sm:text-xl font-medium pt-3 pb-4 sm:pb-5">Back-End</h3>
+         <div className="flex flex-wrap gap-3 sm:gap-5">
           <Icons name="Node.js" image={node} />
           <Icons name="Python" image={python} />
          </div>
-        <h3 className="text-xl font-medium mt-6 mb-4">Tools</h3>
-            <div className="flex flex-wrap gap-5">
+        <h3 className="text-lg sm:text-xl font-medium mt-6 mb-4">Tools</h3>
+            <div className="flex flex-wrap gap-3 sm:gap-5">
             <Icons name="Git" image={git} />
             <Icons name="Github" image={github} />
             <Icons name="VSCode" image={vscode} />
