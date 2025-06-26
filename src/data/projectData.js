@@ -19,5 +19,6 @@ export const projectData = [
           icons: [reactLogo,tailwindLogo],
           iconName: ["React", "Tailwind"],
           link: "https://poketeambuild.netlify.app/"
-        }
+        },
+     
 ]
