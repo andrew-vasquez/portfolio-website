@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@plugin "daisyui";
 @layer base {
     *, *::before, *::after {
         box-sizing: border-box;
