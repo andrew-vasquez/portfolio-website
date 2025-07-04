@@ -22,8 +22,8 @@ const Skills = () => {
                <Icons name="HTML" image={htmlLogo} />
                <Icons name="CSS" image={cssLogo} />
                 <Icons name="JavaScript" image={jsLogo} />
-                <Icons name="React" image={reactLogo} />
                 <Icons name="TypeScript" image={typescript} />
+                <Icons name="React" image={reactLogo} />
                 <Icons name="Tailwind" image={tailwindLogo} />
             </div>
          <h3 className="text-lg sm:text-xl font-medium pt-3 pb-4 sm:pb-5">Back-End</h3>
