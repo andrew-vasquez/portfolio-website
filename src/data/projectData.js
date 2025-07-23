@@ -5,12 +5,12 @@ import terrenos from "../assets/projects/terrenos_oaxaca.png"
 import pokemon from "../assets/projects/poketeambuilder.png"
 export const projectData = [
     {
-            title: "Terrenos Oaxaca",
+            title: "ALFA Inmobiliaria",
             description: "Landing page for a real estate company in Oaxaca, Mexico that shows off listings for sale.",
             image: terrenos,
             icons: [reactLogo, typescript, tailwindLogo],
             iconName: ["React", "TypeScript", "Tailwind"],
-            link: "https://terrenos-oaxaca.vercel.app/"
+            link: "https://alfa-inmobiliaria.vercel.app/"
         },
         {
           title: "Pokemon Team Builder",
