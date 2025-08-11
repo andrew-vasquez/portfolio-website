@@ -1,9 +1,9 @@
 import reactLogo from "../assets/icons/react.svg";
 import tailwindLogo from "../assets/icons/tailwind.svg";
 import typescript from "../assets/icons/typescript.svg";
-import terrenos from "../assets/projects/terrenos_oaxaca.png";
-import pokemon from "../assets/projects/poketeambuilder.png";
-import daylybread from "../assets/projects/daylybread.png";
+import alfa from "../assets/projects/alfa.webp";
+import pokemon from "../assets/projects/poketeambuilder.webp";
+import daylybread from "../assets/projects/daylybread.webp";
 export const projectData = [
   {
     title: "DaylyBread",
@@ -12,13 +12,13 @@ export const projectData = [
     image: daylybread,
     icons: [reactLogo, typescript, tailwindLogo],
     iconName: ["React", "TypeScript", "Tailwind"],
-    link: "https://daylybread-page.vercel.app/",
+    link: "https://daylybread.com",
   },
   {
     title: "ALFA Inmobiliaria",
     description:
       "Landing page for a real estate company in Oaxaca, Mexico that shows off listings for sale.",
-    image: terrenos,
+    image: alfa,
     icons: [reactLogo, typescript, tailwindLogo],
     iconName: ["React", "TypeScript", "Tailwind"],
     link: "https://alfa-inmobiliaria.vercel.app/",
