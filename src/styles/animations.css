@@ -1,67 +1,227 @@
-/* Performance optimizations for animations */
+/* High-performance CSS-only animations - No DOM mutations */
 
-/* Enable hardware acceleration for better performance */
-.motion-element {
-  will-change: transform, opacity;
-  transform: translateZ(0);
+/* Navbar smooth entrance - no stuttering */
+.navbar-container {
+  animation: navbar-fade-in 0.6s ease-out;
+}
+
+.navbar-logo {
+  animation: navbar-slide-in 0.6s ease-out 0.1s both;
+}
+
+.navbar-icon {
+  animation: navbar-icon-in 0.4s ease-out 0.2s both;
+}
+
+.navbar-icon:hover {
+  transform: scale(1.05);
+}
+
+.navbar-logo:hover {
+  transform: scale(1.02);
+}
+
+/* Keyframes for smooth entrance */
+@keyframes navbar-fade-in {
+  from {
+    opacity: 0.8;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes navbar-slide-in {
+  from {
+    opacity: 0.8;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes navbar-icon-in {
+  from {
+    opacity: 0.8;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Performance optimizations */
+.navbar-container,
+.navbar-logo,
+.navbar-icon {
+  will-change: auto; /* Let browser optimize */
   backface-visibility: hidden;
-  perspective: 1000px;
+  transform: translateZ(0); /* Force GPU layer */
 }
 
-/* Optimize image rendering */
-.motion-image {
-  will-change: transform;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
+/* Name/Hero section animations */
+.name-container {
+  animation: hero-fade-in 0.3s ease-out 0.05s both;
 }
 
-/* Reduce paint operations */
-.motion-container {
-  contain: layout style paint;
-  will-change: auto;
+.name-title {
+  animation: hero-title-in 0.2s ease-out 0.1s both;
 }
 
-/* Optimize text rendering during animations */
-.motion-text {
-  text-rendering: optimizeSpeed;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.name-letter {
+  animation: letter-fade-in 0.15s ease-out both;
+  animation-delay: calc(0.15s + var(--letter-index) * 0.015s);
 }
 
-/* Prevent layout thrashing */
-.motion-fixed-dimensions {
-  contain: size layout;
+.name-letter:hover {
+  transform: scale(1.05);
+  color: #ffffff;
+  transition: all 0.15s ease;
 }
 
-/* GPU acceleration for shadows */
-.motion-shadow {
-  will-change: box-shadow;
-  transform: translateZ(0);
+.name-subtitle {
+  animation: subtitle-slide-in 0.25s ease-out 0.45s both;
 }
 
-/* Optimize scroll-triggered animations */
-.motion-scroll-container {
-  contain: layout;
-  will-change: auto;
+.name-subtitle:hover {
+  color: #e4e4e7;
+  transition: color 0.15s ease;
 }
 
-/* Preload critical animations */
-@media (prefers-reduced-motion: no-preference) {
-  .motion-preload {
-    animation-delay: 0s;
-    animation-fill-mode: both;
+/* Hero keyframes */
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes hero-title-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes letter-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subtitle-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* About section animations - smooth scroll-triggered */
+.about-section {
+  animation: about-fade-in 0.3s ease-out 0.6s both;
+}
+
+.about-title {
+  animation: about-title-slide 0.2s ease-out 0.65s both;
+}
+
+.about-divider {
+  animation: about-divider-expand 0.3s ease-out 0.7s both;
+  transform-origin: left;
+}
+
+.about-content {
+  animation: about-content-in 0.25s ease-out 0.8s both;
+}
+
+.about-highlight:hover {
+  color: #ffffff;
+  transition: color 0.15s ease;
+}
+
+@keyframes about-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes about-title-slide {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes about-divider-expand {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes about-content-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 /* Respect user preferences */
 @media (prefers-reduced-motion: reduce) {
-  .motion-element,
-  .motion-image,
-  .motion-container,
-  .motion-shadow {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  .navbar-container,
+  .navbar-logo,
+  .navbar-icon,
+  .name-container,
+  .name-title,
+  .name-letter,
+  .name-subtitle,
+  .about-section,
+  .about-title,
+  .about-divider,
+  .about-content {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .navbar-icon:hover,
+  .navbar-logo:hover,
+  .name-letter:hover,
+  .name-subtitle:hover,
+  .about-highlight:hover {
+    transform: none !important;
+    color: inherit !important;
   }
 }
