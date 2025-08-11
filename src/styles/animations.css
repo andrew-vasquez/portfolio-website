@@ -15,6 +15,22 @@
   image-rendering: crisp-edges;
 }
 
+/* Prevent navbar icon flickering */
+.navbar-icon {
+  contain: layout;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  /* Reserve space to prevent layout shift */
+  min-width: 24px;
+  min-height: 24px;
+  display: block;
+}
+
+/* Optimize navbar container */
+.navbar-container {
+  contain: layout style;
+}
+
 /* Reduce paint operations */
 .motion-container {
   contain: layout style paint;
