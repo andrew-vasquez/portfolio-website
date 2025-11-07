@@ -13,6 +13,9 @@ import vscode from "../assets/icons/vscode.svg"
 import node from "../assets/icons/nodejs.svg"
 import python from "../assets/icons/python.svg"
 import typescript from "../assets/icons/typescript.svg"
+import postgresql from "../assets/icons/postgresql.svg"
+
+
 
 const Skills = () => {
   const shouldReduceMotion = useReducedMotion();
@@ -29,12 +32,13 @@ const Skills = () => {
     ],
     backEnd: [
       { name: "Node.js", image: node },
-      { name: "Python", image: python }
+      { name: "Python", image: python },
+      { name: "PostgreSQL", image: postgresql }
     ],
     tools: [
       { name: "Git", image: git },
       { name: "Github", image: github },
-      { name: "VSCode", image: vscode }
+      { name: "VSCode", image: vscode },
     ]
   }), []);
 
