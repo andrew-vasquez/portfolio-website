@@ -23,6 +23,7 @@ const Skills = () => {
         { name: "TypeScript", image: "/icons/typescript.svg" },
         { name: "React", image: "/icons/react.svg" },
         { name: "Tailwind", image: "/icons/tailwind.svg" },
+        { name: "Next.js", image: "/icons/nextjs.svg" },
       ],
       backEnd: [
         { name: "Node.js", image: "/icons/nodejs.svg" },

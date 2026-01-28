@@ -1225,6 +1225,10 @@ const Skills = ()=>{
                 {
                     name: "Tailwind",
                     image: "/icons/tailwind.svg"
+                },
+                {
+                    name: "Next.js",
+                    image: "/icons/nextjs.svg"
                 }
             ],
             backEnd: [
@@ -1288,7 +1292,7 @@ const Skills = ()=>{
                     children: title
                 }, void 0, false, {
                     fileName: "[project]/components/Skills.tsx",
-                    lineNumber: 61,
+                    lineNumber: 62,
                     columnNumber: 7
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -1311,17 +1315,17 @@ const Skills = ()=>{
                                 image: skill.image
                             }, void 0, false, {
                                 fileName: "[project]/components/Skills.tsx",
-                                lineNumber: 85,
+                                lineNumber: 86,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         }, skill.name, false, {
                             fileName: "[project]/components/Skills.tsx",
-                            lineNumber: 76,
+                            lineNumber: 77,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0)))
                 }, void 0, false, {
                     fileName: "[project]/components/Skills.tsx",
-                    lineNumber: 68,
+                    lineNumber: 69,
                     columnNumber: 7
                 }, ("TURBOPACK compile-time value", void 0))
             ]
@@ -1343,7 +1347,7 @@ const Skills = ()=>{
                 children: "Skills"
             }, void 0, false, {
                 fileName: "[project]/components/Skills.tsx",
-                lineNumber: 101,
+                lineNumber: 102,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].hr, {
@@ -1356,7 +1360,7 @@ const Skills = ()=>{
                 }
             }, void 0, false, {
                 fileName: "[project]/components/Skills.tsx",
-                lineNumber: 108,
+                lineNumber: 109,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(SkillGroup, {
@@ -1365,7 +1369,7 @@ const Skills = ()=>{
                 delay: 0
             }, void 0, false, {
                 fileName: "[project]/components/Skills.tsx",
-                lineNumber: 114,
+                lineNumber: 115,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(SkillGroup, {
@@ -1374,7 +1378,7 @@ const Skills = ()=>{
                 delay: 0.2
             }, void 0, false, {
                 fileName: "[project]/components/Skills.tsx",
-                lineNumber: 115,
+                lineNumber: 116,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(SkillGroup, {
@@ -1383,13 +1387,13 @@ const Skills = ()=>{
                 delay: 0.4
             }, void 0, false, {
                 fileName: "[project]/components/Skills.tsx",
-                lineNumber: 116,
+                lineNumber: 117,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/components/Skills.tsx",
-        lineNumber: 93,
+        lineNumber: 94,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 };
