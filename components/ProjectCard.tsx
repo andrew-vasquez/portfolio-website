@@ -58,9 +58,11 @@ const ProjectCard = ({
         <div className="flex-1 flex flex-col justify-between">
           <div>
             <motion.a
-              className="text-xl inline-flex items-center gap-2 hover:opacity-60 transition mb-2"
+              className="text-xl inline-flex items-center gap-2 hover:opacity-60 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#202023] rounded transition-opacity mb-2"
               target="_blank"
+              rel="noopener noreferrer"
               href={link}
+              aria-label={`View ${title} project`}
               whileHover={
                 shouldReduceMotion
                   ? {}
@@ -74,6 +76,7 @@ const ProjectCard = ({
               <h3 className="text-xl font-semibold inline-block">{title}</h3>
               <motion.span
                 className="text-zinc-400"
+                aria-hidden="true"
                 whileHover={
                   shouldReduceMotion
                     ? {}
@@ -137,10 +140,11 @@ const ProjectCard = ({
         >
           <Image
             src={image}
-            alt={title}
+            alt={`Screenshot of ${title} project`}
             width={208}
             height={128}
             className="w-full h-48 mb-5 shadow-xl rounded-lg md:w-52 md:h-32 md:mb-0 object-cover"
+            loading="lazy"
           />
         </motion.div>
       </motion.div>

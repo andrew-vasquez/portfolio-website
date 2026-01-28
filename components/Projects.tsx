@@ -30,7 +30,7 @@ const Projects = memo(() => {
       style={{ willChange: "opacity" }}
     >
       <motion.h2
-        className="text-2xl font-bold pb-1"
+        className="text-2xl font-bold pb-1 text-balance"
         variants={variants.slideLeft}
         transition={transitions.spring}
       >

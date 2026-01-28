@@ -25,20 +25,25 @@ const Icons = memo(({ name, image }: IconsProps) => {
   return (
     <div className="flex flex-col justify-center items-center">
       <motion.div
-        className="inline-flex flex-col justify-center items-center p-2 border rounded-md border-zinc-500 bg-zinc-900"
+        className="inline-flex flex-col justify-center items-center p-2 border rounded-md border-zinc-500 bg-zinc-900 focus-visible:ring-2 focus-visible:ring-zinc-400"
         whileHover={hoverVariants}
         whileTap={{ scale: 0.95 }}
         style={{ willChange: "transform, border-color, background-color" }}
+        role="img"
+        aria-label={name}
       >
         <Image
           className="w-9 h-9"
           src={image}
-          alt={name}
+          alt=""
           width={36}
           height={36}
+          aria-hidden="true"
         />
       </motion.div>
-      <span className="text-zinc-400 text-sm mt-1 font-sans">{name}</span>
+      <span className="text-zinc-400 text-sm mt-1 font-sans" aria-hidden="true">
+        {name}
+      </span>
     </div>
   );
 });

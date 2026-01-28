@@ -26,7 +26,7 @@ const About = memo(() => {
       style={{ willChange: "opacity, transform" }}
     >
       <motion.h2
-        className="text-xl sm:text-2xl font-bold pb-1"
+        className="text-xl sm:text-2xl font-bold pb-1 text-balance"
         variants={variants.slideLeft}
         transition={transitions.spring}
       >

@@ -65,37 +65,42 @@ const Navbar = () => {
       </motion.div>
 
       <div className="flex gap-1 sm:gap-2 items-center">
-        <a target="_blank" href="mailto:andrewvasquez314@gmail.com"></a>
         <motion.a
-          className="w-10 sm:w-12 hover:bg-zinc-900 hover:border-zinc-500 p-1.5 sm:p-2 rounded-md border border-transparent"
+          className="w-10 sm:w-12 hover:bg-zinc-900 hover:border-zinc-500 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#202023] p-1.5 sm:p-2 rounded-md border border-transparent transition-colors"
           target="_blank"
+          rel="noopener noreferrer"
           href="https://github.com/andrew-vasquez"
+          aria-label="View GitHub Profile"
           initial={{ opacity: 0, y: -5 }}
           animate={imagesLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
         >
           <Image
             src="/icons/github.svg"
-            alt="Github Logo"
+            alt=""
             width={32}
             height={32}
             className="navbar-icon w-full h-auto block"
+            aria-hidden="true"
           />
         </motion.a>
         <motion.a
-          className="w-10 sm:w-12 hover:bg-zinc-900 hover:border-zinc-500 p-1.5 sm:p-2 rounded-md border border-transparent"
+          className="w-10 sm:w-12 hover:bg-zinc-900 hover:border-zinc-500 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#202023] p-1.5 sm:p-2 rounded-md border border-transparent transition-colors"
           target="_blank"
+          rel="noopener noreferrer"
           href="https://www.linkedin.com/in/andrew-vasquez-000434237/"
+          aria-label="View LinkedIn Profile"
           initial={{ opacity: 0, y: -5 }}
           animate={imagesLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.3, delay: 0.15, ease: "easeOut" }}
         >
           <Image
             src="/icons/linkedin.svg"
-            alt="White Linkedin Logo"
+            alt=""
             width={32}
             height={32}
             className="navbar-icon w-full h-auto block"
+            aria-hidden="true"
           />
         </motion.a>
       </div>

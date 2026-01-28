@@ -2,6 +2,9 @@
 
 import { motion } from "motion/react";
 
+// Static year to avoid hydration mismatch
+const CURRENT_YEAR = 2026;
+
 const Footer = () => {
   return (
     <>
@@ -14,23 +17,22 @@ const Footer = () => {
         style={{ transformOrigin: "center" }}
       />
       <motion.div
-        className="footer sm:footer-horizontal footer-center text-base-content p-4"
+        className="text-center p-4"
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
       >
-        <aside>
-          <motion.p
-            whileHover={{
-              scale: 1.02,
-              color: "#ffffff",
-              transition: { duration: 0.15 },
-            }}
-          >
-            Andrew Vasquez {new Date().getFullYear()}
-          </motion.p>
-        </aside>
+        <motion.p
+          className="text-zinc-400 text-sm"
+          whileHover={{
+            scale: 1.02,
+            color: "#ffffff",
+            transition: { duration: 0.15 },
+          }}
+        >
+          © {CURRENT_YEAR} Andrew Vasquez
+        </motion.p>
       </motion.div>
     </>
   );

@@ -18,8 +18,8 @@ const Name = () => {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
     >
-      <motion.h2
-        className="text-2xl sm:text-4xl font-bold block text-center"
+      <motion.h1
+        className="text-2xl sm:text-4xl font-bold block text-center text-balance"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3, delay: 0.2 }}
@@ -45,7 +45,7 @@ const Name = () => {
             {letter === " " ? "\u00A0" : letter}
           </motion.span>
         ))}
-      </motion.h2>
+      </motion.h1>
       <motion.p
         className="text-lg sm:text-2xl text-center text-zinc-400"
         initial={{ opacity: 0, y: 5 }}
