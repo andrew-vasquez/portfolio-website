@@ -54,6 +54,20 @@ const Name = () => {
       >
         {title}
       </motion.p>
+      <motion.div
+        className="flex items-center gap-2 mt-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4, delay: 0.85, ease: "easeOut" }}
+      >
+        <span className="relative flex h-2 w-2">
+          <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400/75 animate-ping" />
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+        </span>
+        <span className="text-xs sm:text-sm text-zinc-500 font-sans tracking-wider uppercase">
+          Open to opportunities
+        </span>
+      </motion.div>
     </motion.div>
   );
 };

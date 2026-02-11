@@ -48,9 +48,10 @@ const Projects = memo(() => {
         whileInView="animate"
         viewport={viewportConfig}
       >
-        {projectData.map((project) => (
+        {projectData.map((project, index) => (
           <ProjectCard
             key={project.title}
+            number={index + 1}
             title={project.title}
             description={project.description}
             image={project.image}

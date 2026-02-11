@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { memo } from "react";
-import { variants, transitions, viewportConfig } from "@/lib/animations";
+import { variants, transitions, viewportConfig, easing } from "@/lib/animations";
 
 const About = memo(() => {
   const shouldReduceMotion = useReducedMotion();
@@ -15,6 +15,13 @@ const About = memo(() => {
       transition: { ...transitions.medium, staggerChildren: 0.1 },
     },
   };
+
+  const cardHover = shouldReduceMotion
+    ? {}
+    : {
+        borderColor: "#52525b",
+        transition: { duration: 0.2, ease: easing.smooth },
+      };
 
   return (
     <motion.section
@@ -70,6 +77,45 @@ const About = memo(() => {
         real-world problems. I enjoy working with modern web technologies and am
         always looking to expand my skill set.
       </motion.p>
+
+      <motion.div
+        className="grid grid-cols-2 gap-3 mt-8"
+        variants={variants.fadeIn}
+        transition={transitions.medium}
+      >
+        <motion.div
+          className="border border-zinc-700/50 rounded-lg p-4 bg-zinc-900/30"
+          variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
+          whileHover={cardHover}
+          style={{ willChange: "border-color" }}
+        >
+          <p className="text-zinc-500 text-[10px] sm:text-xs uppercase tracking-widest font-sans mb-1.5">
+            Education
+          </p>
+          <p className="text-zinc-200 text-sm sm:text-base leading-snug">
+            B.S. Software Engineering
+          </p>
+          <p className="text-zinc-500 text-xs sm:text-sm mt-0.5">
+            Western Governors University
+          </p>
+        </motion.div>
+        <motion.div
+          className="border border-zinc-700/50 rounded-lg p-4 bg-zinc-900/30"
+          variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
+          whileHover={cardHover}
+          style={{ willChange: "border-color" }}
+        >
+          <p className="text-zinc-500 text-[10px] sm:text-xs uppercase tracking-widest font-sans mb-1.5">
+            Focus
+          </p>
+          <p className="text-zinc-200 text-sm sm:text-base leading-snug">
+            Full-Stack Development
+          </p>
+          <p className="text-zinc-500 text-xs sm:text-sm mt-0.5">
+            React &middot; TypeScript &middot; Node.js
+          </p>
+        </motion.div>
+      </motion.div>
     </motion.section>
   );
 });

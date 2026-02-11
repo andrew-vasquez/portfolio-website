@@ -29,7 +29,6 @@ const Skills = () => {
         { name: "Node.js", image: "/icons/nodejs.svg" },
         { name: "Python", image: "/icons/python.svg" },
         { name: "PostgreSQL", image: "/icons/postgresql.svg" },
-        { name: "NestJs", image: "/icons/nestjs.svg" },
         { name: "Prisma", image: "/icons/prisma.svg" },
       ],
       tools: [

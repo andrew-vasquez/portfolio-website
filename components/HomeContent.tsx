@@ -7,6 +7,7 @@ import Name from "@/components/Name";
 import Projects from "@/components/Projects";
 import Footer from "@/components/Footer";
 import Skills from "@/components/Skills";
+import Contact from "@/components/Contact";
 import { variants, transitions, staggerContainer } from "@/lib/animations";
 
 export default function HomeContent() {
@@ -37,10 +38,11 @@ export default function HomeContent() {
           transition={transitions.medium}
           style={{ willChange: "opacity" }}
         >
-        <About />
-        <Projects />
-        <Skills />
-      </motion.main>
+          <About />
+          <Projects />
+          <Skills />
+          <Contact />
+        </motion.main>
 
         <motion.footer
           variants={variants.slideUp}

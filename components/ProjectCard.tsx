@@ -12,6 +12,7 @@ interface ProjectCardProps {
   icons: string[];
   iconName: string[];
   link: string;
+  number: number;
 }
 
 const ProjectCard = ({
@@ -21,6 +22,7 @@ const ProjectCard = ({
   icons,
   iconName,
   link,
+  number,
 }: ProjectCardProps) => {
   const shouldReduceMotion = useReducedMotion();
 
@@ -51,10 +53,16 @@ const ProjectCard = ({
       viewport={{ once: true, margin: "-50px" }}
     >
       <motion.div
-        className="border border-zinc-600 p-8 rounded-lg flex flex-col-reverse md:flex-row justify-between mb-7 shadow-xl h-full min-h-[400px] md:min-h-[200px]"
+        className="border border-zinc-600 p-8 rounded-lg flex flex-col-reverse md:flex-row justify-between mb-7 shadow-xl h-full min-h-[400px] md:min-h-[200px] relative"
         whileHover={hoverVariants}
         style={{ willChange: "transform, box-shadow" }}
       >
+        <span
+          className="absolute top-4 right-4 text-zinc-700 text-[10px] font-sans tracking-[0.25em] select-none"
+          aria-hidden="true"
+        >
+          {String(number).padStart(2, "0")}
+        </span>
         <div className="flex-1 flex flex-col justify-between">
           <div>
             <motion.a
