@@ -39,23 +39,23 @@ const ProjectCard = ({
     ? {}
     : {
         y: -4,
-        boxShadow:
-          "0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05)",
+        borderColor: "rgba(255, 255, 255, 0.12)",
+        backgroundColor: "rgba(255, 255, 255, 0.04)",
         transition: { duration: 0.3, ease: easing.smooth },
       };
 
   return (
     <motion.article
-      className="bg-gradient-to-br from-gray-500/10 to-transparent h-full"
+      className="h-full"
       variants={cardVariants}
       initial="initial"
       whileInView="animate"
       viewport={{ once: true, margin: "-50px" }}
     >
       <motion.div
-        className="border border-zinc-600 p-8 rounded-lg flex flex-col-reverse md:flex-row justify-between mb-7 shadow-xl h-full min-h-[400px] md:min-h-[200px] relative"
+        className="border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm p-8 rounded-lg flex flex-col-reverse md:flex-row justify-between mb-7 h-full min-h-[400px] md:min-h-[200px] relative"
         whileHover={hoverVariants}
-        style={{ willChange: "transform, box-shadow" }}
+        style={{ willChange: "transform, border-color, background-color" }}
       >
         <span
           className="absolute top-4 left-4 text-zinc-700 text-[10px] font-sans tracking-[0.25em] select-none"

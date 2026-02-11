@@ -4,17 +4,14 @@ import { motion, useReducedMotion } from "motion/react";
 import { useMemo } from "react";
 import Icons from "./Icons";
 import {
-  variants,
   transitions,
   easing,
-  staggerContainer,
   viewportConfig,
 } from "@/lib/animations";
 
 const Skills = () => {
   const shouldReduceMotion = useReducedMotion();
 
-  // Memoize skill data to prevent unnecessary re-renders
   const skillsData = useMemo(
     () => ({
       frontEnd: [
@@ -41,89 +38,67 @@ const Skills = () => {
     []
   );
 
-  const sectionVariants = {
-    initial: { opacity: 0 },
-    animate: {
-      opacity: 1,
-      transition: { ...transitions.medium, staggerChildren: 0.1 },
-    },
-  };
-
   const cardHover = shouldReduceMotion
     ? {}
     : {
-        borderColor: "#52525b",
+        borderColor: "rgba(255, 255, 255, 0.12)",
         transition: { duration: 0.2, ease: easing.smooth },
       };
 
   const SkillGroup = ({
     title,
     skills,
-    delay = 0,
   }: {
     title: string;
     skills: { name: string; image: string }[];
-    delay?: number;
   }) => (
     <motion.div
-      className="border border-zinc-700/50 rounded-lg p-4 sm:p-5 mt-4 bg-zinc-900/30"
-      variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
+      className="border border-white/[0.06] rounded-lg p-4 sm:p-5 mt-4 bg-white/[0.03] backdrop-blur-sm"
+      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={viewportConfig}
+      transition={transitions.medium}
       whileHover={cardHover}
-      style={{ willChange: "border-color" }}
     >
-      <motion.h3
-        className="text-lg sm:text-xl font-medium pb-4 sm:pb-5"
-        variants={variants.slideLeft}
-        transition={{ ...transitions.fast, delay }}
-      >
+      <h3 className="text-lg sm:text-xl font-medium pb-4 sm:pb-5">
         {title}
-      </motion.h3>
-      <motion.div
-        className="flex flex-wrap gap-3 sm:gap-5"
-        variants={staggerContainer}
-      >
-        {skills.map((skill, index) => (
-          <motion.div
-            key={skill.name}
-            variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
-            transition={{
-              ...transitions.spring,
-              delay: delay + 0.1 + index * 0.05,
-            }}
-            style={{ willChange: "transform, opacity" }}
-          >
-            <Icons name={skill.name} image={skill.image} />
-          </motion.div>
+      </h3>
+      <div className="flex flex-wrap gap-3 sm:gap-5">
+        {skills.map((skill) => (
+          <Icons key={skill.name} name={skill.name} image={skill.image} />
         ))}
-      </motion.div>
+      </div>
     </motion.div>
   );
 
   return (
     <motion.section
       className="my-12 sm:my-20"
-      variants={sectionVariants}
-      initial="initial"
-      whileInView="animate"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={viewportConfig}
-      style={{ willChange: "opacity" }}
+      transition={transitions.medium}
     >
       <motion.h2
         className="text-xl sm:text-2xl font-bold pb-1 text-balance"
-        variants={variants.slideLeft}
+        initial={{ opacity: 0, x: -15 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={viewportConfig}
         transition={transitions.spring}
       >
         Skills
       </motion.h2>
       <motion.hr
-        className="mb-4 border-zinc-600"
-        variants={variants.scaleX}
+        className="mb-4 border-white/10"
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={viewportConfig}
         transition={transitions.medium}
-        style={{ transformOrigin: "left", willChange: "transform" }}
+        style={{ transformOrigin: "left" }}
       />
-      <SkillGroup title="Front-End" skills={skillsData.frontEnd} delay={0} />
-      <SkillGroup title="Back-End" skills={skillsData.backEnd} delay={0.2} />
-      <SkillGroup title="Tools" skills={skillsData.tools} delay={0.4} />
+      <SkillGroup title="Front-End" skills={skillsData.frontEnd} />
+      <SkillGroup title="Back-End" skills={skillsData.backEnd} />
+      <SkillGroup title="Tools" skills={skillsData.tools} />
     </motion.section>
   );
 };

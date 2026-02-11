@@ -19,7 +19,8 @@ const About = memo(() => {
   const cardHover = shouldReduceMotion
     ? {}
     : {
-        borderColor: "#52525b",
+        borderColor: "rgba(255, 255, 255, 0.12)",
+        backgroundColor: "rgba(255, 255, 255, 0.04)",
         transition: { duration: 0.2, ease: easing.smooth },
       };
 
@@ -40,7 +41,7 @@ const About = memo(() => {
         About Me
       </motion.h2>
       <motion.hr
-        className="mb-4 border-zinc-600"
+        className="mb-4 border-white/10"
         variants={variants.scaleX}
         transition={transitions.medium}
         style={{ transformOrigin: "left", willChange: "transform" }}
@@ -84,7 +85,7 @@ const About = memo(() => {
         transition={transitions.medium}
       >
         <motion.div
-          className="border border-zinc-700/50 rounded-lg p-4 bg-zinc-900/30"
+          className="border border-white/[0.06] rounded-lg p-4 bg-white/[0.03] backdrop-blur-sm"
           variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
           whileHover={cardHover}
           style={{ willChange: "border-color" }}
@@ -100,7 +101,7 @@ const About = memo(() => {
           </p>
         </motion.div>
         <motion.div
-          className="border border-zinc-700/50 rounded-lg p-4 bg-zinc-900/30"
+          className="border border-white/[0.06] rounded-lg p-4 bg-white/[0.03] backdrop-blur-sm"
           variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
           whileHover={cardHover}
           style={{ willChange: "border-color" }}

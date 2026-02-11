@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <>
       <motion.hr
-        className="mb-4 border-zinc-600"
+        className="mb-4 border-white/10"
         initial={{ scaleX: 0 }}
         whileInView={{ scaleX: 1 }}
         viewport={{ once: true }}

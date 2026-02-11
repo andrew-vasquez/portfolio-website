@@ -25,7 +25,7 @@ const Icons = memo(({ name, image }: IconsProps) => {
   return (
     <div className="flex flex-col justify-center items-center">
       <motion.div
-        className="inline-flex flex-col justify-center items-center p-2 border rounded-md border-zinc-500 bg-zinc-900 focus-visible:ring-2 focus-visible:ring-zinc-400"
+        className="inline-flex flex-col justify-center items-center p-2 border rounded-md border-white/10 bg-white/5 backdrop-blur-sm focus-visible:ring-2 focus-visible:ring-zinc-400"
         whileHover={hoverVariants}
         whileTap={{ scale: 0.95 }}
         style={{ willChange: "transform, border-color, background-color" }}

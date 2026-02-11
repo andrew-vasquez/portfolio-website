@@ -37,7 +37,7 @@ const Projects = memo(() => {
         Projects
       </motion.h2>
       <motion.hr
-        className="mb-4 border-zinc-600"
+        className="mb-4 border-white/10"
         variants={variants.scaleX}
         transition={transitions.medium}
         style={{ transformOrigin: "left", willChange: "transform" }}

@@ -4,8 +4,8 @@ export const projectData = [
     description:
       "An e-commerce website that sells nfc tap devices to churches and other organizations.",
     image: "/projects/daylybread.webp",
-    icons: ["/icons/react.svg", "/icons/typescript.svg", "/icons/tailwind.svg"],
-    iconName: ["React", "TypeScript", "Tailwind"],
+    icons: ["/icons/nextjs.svg", "/icons/typescript.svg", "/icons/tailwind.svg"],
+    iconName: ["Next.js", "TypeScript", "Tailwind"],
     link: "https://daylybread.com",
   },
   {
