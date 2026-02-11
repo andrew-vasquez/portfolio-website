@@ -56,7 +56,7 @@ const Contact = memo(() => {
         variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
         transition={transitions.medium}
       >
-        I&apos;m always interested in hearing about new projects and
+        I&#8217;m always interested in hearing about new projects and
         opportunities. Whether you want to collaborate on something or just say
         hello, feel free to reach out.
       </motion.p>

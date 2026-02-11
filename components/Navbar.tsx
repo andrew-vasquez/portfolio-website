@@ -52,7 +52,6 @@ const Navbar = () => {
         initial={{ opacity: 0, x: -10 }}
         animate={imagesLoaded ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.3, delay: 0.05, ease: "easeOut" }}
-        whileHover={{ scale: 1.02, transition: { duration: 0.15 } }}
       >
         <Image
           className="w-32 sm:w-52 pr-2 sm:pr-5"

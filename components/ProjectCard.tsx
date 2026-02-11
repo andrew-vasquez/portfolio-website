@@ -57,12 +57,12 @@ const ProjectCard = ({
         whileHover={hoverVariants}
       >
         <span
-          className="absolute top-4 left-4 text-zinc-700 text-[10px] font-sans tracking-[0.25em] select-none"
+          className="absolute top-4 left-4 text-zinc-700 text-[10px] font-sans tracking-[0.25em] select-none tabular-nums"
           aria-hidden="true"
         >
           {String(number).padStart(2, "0")}
         </span>
-        <div className="flex-1 flex flex-col justify-between">
+        <div className="flex-1 min-w-0 flex flex-col justify-between">
           <div>
             <motion.a
               className="text-xl inline-flex items-center gap-2 hover:opacity-60 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f] rounded transition-opacity mb-2"

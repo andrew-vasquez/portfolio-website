@@ -47,7 +47,7 @@ const Name = () => {
         ))}
       </motion.h1>
       <motion.p
-        className="text-lg sm:text-2xl text-center text-zinc-400"
+        className="text-lg sm:text-2xl text-center text-zinc-400 text-pretty"
         initial={{ opacity: 0, y: 5 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: 0.6, ease: "easeOut" }}
@@ -61,7 +61,7 @@ const Name = () => {
         transition={{ duration: 0.4, delay: 0.85, ease: "easeOut" }}
       >
         <span className="relative flex h-2 w-2">
-          <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400/75 animate-ping" />
+          <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400/75 animate-ping motion-reduce:animate-none" />
           <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
         </span>
         <span className="text-xs sm:text-sm text-zinc-500 font-sans tracking-wider uppercase">

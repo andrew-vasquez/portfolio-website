@@ -23,16 +23,9 @@ const Footer = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
       >
-        <motion.p
-          className="text-zinc-400 text-sm"
-          whileHover={{
-            scale: 1.02,
-            color: "#ffffff",
-            transition: { duration: 0.15 },
-          }}
-        >
+        <p className="text-zinc-400 text-sm">
           &copy; {CURRENT_YEAR} Andrew Vasquez
-        </motion.p>
+        </p>
         <p className="text-zinc-600 text-xs mt-1.5 font-sans">
           Built with Next.js &amp; Tailwind CSS
         </p>
