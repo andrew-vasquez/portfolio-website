@@ -17,11 +17,15 @@ const PixelSnow = dynamic(() => import("@/components/PixelSnow"), {
 });
 
 function useIsMobile(breakpoint = 768) {
-  const [isMobile, setIsMobile] = useState(true);
+  const getMatches = () =>
+    typeof window !== "undefined"
+      ? window.matchMedia(`(max-width: ${breakpoint - 1}px)`).matches
+      : true;
+
+  const [isMobile, setIsMobile] = useState(getMatches);
 
   useEffect(() => {
     const mql = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
-    setIsMobile(mql.matches);
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mql.addEventListener("change", handler);
     return () => mql.removeEventListener("change", handler);

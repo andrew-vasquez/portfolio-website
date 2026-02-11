@@ -57,22 +57,6 @@ export const variants = {
   },
 };
 
-// Hover animations with performance optimization
-export const hoverAnimations = {
-  lift: {
-    y: -2,
-    transition: { duration: 0.2, ease: easing.smooth },
-  },
-  scale: {
-    scale: 1.02,
-    transition: { duration: 0.2, ease: easing.smooth },
-  },
-  glow: {
-    boxShadow: "0 0 20px rgba(255, 255, 255, 0.1)",
-    transition: { duration: 0.2, ease: easing.smooth },
-  },
-};
-
 // Container animation for staggered children
 export const staggerContainer = {
   animate: {
@@ -81,11 +65,4 @@ export const staggerContainer = {
       delayChildren: 0.1,
     },
   },
-};
-
-// Performance-optimized layout animations
-export const layoutTransition = {
-  type: "spring",
-  stiffness: 500,
-  damping: 30,
 };
