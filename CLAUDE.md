@@ -12,27 +12,36 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Architecture
 
-This is a **personal portfolio website** built with Next.js 16 App Router, recently migrated from Vite+React. It's a single-page site with no additional routes.
+Personal portfolio website built with Next.js 16 App Router. Single-page site, no additional routes.
 
 ### Rendering Model
 
-Every component uses `"use client"` because the entire page is animation-heavy (Motion library). The page structure is:
+Every component uses `"use client"` — the entire page is animation-heavy (Motion library). The page structure is:
 
-- `app/layout.tsx` — Root layout with Lora font, metadata/SEO, dark theme (`#202023`)
+- `app/layout.tsx` — Root layout with Lora font, metadata/SEO, dark theme (`#0a0a0f`)
 - `app/page.tsx` — Renders `HomeContent` (the only route)
-- `app/components/HomeContent.tsx` — Client component that orchestrates all sections with staggered Motion animations
+- `components/HomeContent.tsx` — Client component that orchestrates all sections with staggered Motion animations
 - `app/loading.tsx` — Skeleton loading state
 
-### Component Organization
+### Key Files
 
-- `components/` — All UI components: `HomeContent` (page orchestrator), `Navbar`, `Name`, `About`, `Projects`, `ProjectCard`, `Skills`, `Icons`, `Footer`
-- `lib/animations.ts` — Centralized Motion animation variants, transitions, easing curves, and viewport configs. All components import from here for consistency.
+- `lib/animations.ts` — Centralized Motion variants, transitions, easing curves, and viewport configs. All components import from here for consistency.
 - `lib/projectData.ts` — Static project data array used by `Projects`/`ProjectCard`
+- `components/PixelSnow.jsx` — Three.js WebGL shader component (note: `.jsx`, not `.tsx`). Dynamically imported with `ssr: false` to code-split Three.js (~150KB+).
 
 ### Key Patterns
 
 - **Motion library**: Uses `motion/react` (not `framer-motion`). Components use `variants`, `whileInView`, `whileHover` extensively. Reduced motion is respected via `useReducedMotion()`.
+- **Hoisted variants**: Animation variant objects and hover configs are defined at module scope (not inside components) to avoid re-creation on every render. The React Compiler is enabled (`reactCompiler: true` in `next.config.ts`) but hoisting is still preferred for clarity.
 - **Path alias**: `@/*` maps to project root (e.g., `@/components/About`, `@/lib/animations`)
-- **CSS**: Tailwind CSS v4 via `@tailwindcss/postcss`. Custom CSS classes in `globals.css` for animation performance (`motion-element`, `navbar-icon`, etc.) and `prefers-reduced-motion` support.
-- **Images**: Uses `next/image` throughout. SVG icons served from `/public/icons/`, project screenshots from `/public/projects/`.
-- **Package manager**: Bun (uses `bun.lock`)
+- **CSS**: Tailwind CSS v4 via `@tailwindcss/postcss`. Custom CSS classes in `globals.css` for animation performance (`motion-element`, `navbar-icon`, `below-fold-section` with `content-visibility: auto`, etc.) and `prefers-reduced-motion` support.
+- **Images**: Uses `next/image` throughout. SVG icons in `/public/icons/`, project screenshots in `/public/projects/`.
+- **Package manager**: Bun (`bun.lock`)
+
+### Performance Optimizations Already Applied
+
+- `next/dynamic` with `ssr: false` for PixelSnow/Three.js
+- `content-visibility: auto` on below-fold sections via `.below-fold-section` CSS class
+- `matchMedia` listener (not resize) for mobile breakpoint detection in `HomeContent`
+- `optimizePackageImports` for `lucide-react` and `motion`
+- React Compiler enabled (`reactCompiler: true` — top-level in `next.config.ts`, NOT inside `experimental`)
