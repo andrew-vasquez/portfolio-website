@@ -81,9 +81,6 @@ const Skills = () => {
       <motion.div
         className="flex flex-wrap gap-3 sm:gap-5"
         variants={staggerContainer}
-        initial="initial"
-        whileInView="animate"
-        viewport={viewportConfig}
       >
         {skills.map((skill, index) => (
           <motion.div
