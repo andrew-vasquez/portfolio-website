@@ -15,6 +15,22 @@ interface ProjectCardProps {
   number: number;
 }
 
+const cardVariants = {
+  initial: { opacity: 0, y: 20 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { ...transitions.spring, delay: 0.1 },
+  },
+};
+
+const hoverVariantsEnabled = {
+  y: -4,
+  borderColor: "rgba(255, 255, 255, 0.1)",
+  backgroundColor: "#161619",
+  transition: { duration: 0.3, ease: easing.smooth },
+};
+
 const ProjectCard = ({
   title,
   description,
@@ -26,23 +42,7 @@ const ProjectCard = ({
 }: ProjectCardProps) => {
   const shouldReduceMotion = useReducedMotion();
 
-  const cardVariants = {
-    initial: { opacity: 0, y: 20 },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: { ...transitions.spring, delay: 0.1 },
-    },
-  };
-
-  const hoverVariants = shouldReduceMotion
-    ? {}
-    : {
-        y: -4,
-        borderColor: "rgba(255, 255, 255, 0.1)",
-        backgroundColor: "#161619",
-        transition: { duration: 0.3, ease: easing.smooth },
-      };
+  const hoverVariants = shouldReduceMotion ? {} : hoverVariantsEnabled;
 
   return (
     <motion.article
@@ -55,7 +55,6 @@ const ProjectCard = ({
       <motion.div
         className="border border-white/[0.06] bg-[#111116] p-8 rounded-lg flex flex-col-reverse md:flex-row justify-between mb-7 h-full min-h-[400px] md:min-h-[200px] relative"
         whileHover={hoverVariants}
-        style={{ willChange: "transform, border-color, background-color" }}
       >
         <span
           className="absolute top-4 left-4 text-zinc-700 text-[10px] font-sans tracking-[0.25em] select-none"
@@ -79,7 +78,6 @@ const ProjectCard = ({
                       transition: { duration: 0.2, ease: easing.smooth },
                     }
               }
-              style={{ willChange: "transform" }}
             >
               <h3 className="text-xl font-semibold inline-block">{title}</h3>
               <motion.span
@@ -94,8 +92,7 @@ const ProjectCard = ({
                         transition: { duration: 0.2, ease: easing.bounce },
                       }
                 }
-                style={{ willChange: "transform" }}
-              >
+                >
                 <SquareArrowUpRight className="w-5 h-5" />
               </motion.span>
             </motion.a>
@@ -127,8 +124,7 @@ const ProjectCard = ({
                         transition: { duration: 0.2, ease: easing.smooth },
                       }
                 }
-                style={{ willChange: "transform" }}
-              >
+                >
                 <Image
                   src={icon}
                   alt={iconName[index]}

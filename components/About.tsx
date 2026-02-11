@@ -4,25 +4,34 @@ import { motion, useReducedMotion } from "motion/react";
 import { memo } from "react";
 import { variants, transitions, viewportConfig, easing } from "@/lib/animations";
 
+const sectionVariantsDefault = {
+  initial: { opacity: 0, y: 20 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { ...transitions.medium, staggerChildren: 0.1 },
+  },
+};
+
+const sectionVariantsReduced = {
+  initial: { opacity: 0, y: 0 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { ...transitions.medium, staggerChildren: 0.1 },
+  },
+};
+
+const cardHoverEnabled = {
+  borderColor: "rgba(255, 255, 255, 0.1)",
+  backgroundColor: "#161619",
+  transition: { duration: 0.2, ease: easing.smooth },
+};
+
 const About = memo(() => {
   const shouldReduceMotion = useReducedMotion();
-
-  const sectionVariants = {
-    initial: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: { ...transitions.medium, staggerChildren: 0.1 },
-    },
-  };
-
-  const cardHover = shouldReduceMotion
-    ? {}
-    : {
-        borderColor: "rgba(255, 255, 255, 0.1)",
-        backgroundColor: "#161619",
-        transition: { duration: 0.2, ease: easing.smooth },
-      };
+  const sectionVariants = shouldReduceMotion ? sectionVariantsReduced : sectionVariantsDefault;
+  const cardHover = shouldReduceMotion ? {} : cardHoverEnabled;
 
   return (
     <motion.section
@@ -31,7 +40,6 @@ const About = memo(() => {
       initial="initial"
       whileInView="animate"
       viewport={viewportConfig}
-      style={{ willChange: "opacity, transform" }}
     >
       <motion.h2
         className="text-xl sm:text-2xl font-bold pb-1 text-balance"
@@ -44,13 +52,12 @@ const About = memo(() => {
         className="mb-4 border-white/10"
         variants={variants.scaleX}
         transition={transitions.medium}
-        style={{ transformOrigin: "left", willChange: "transform" }}
+        style={{ transformOrigin: "left" }}
       />
       <motion.p
         className="text-base sm:text-lg leading-7 sm:leading-8 mt-4 text-pretty text-zinc-400"
         variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
         transition={transitions.medium}
-        style={{ willChange: "opacity, transform" }}
       >
         Currently a student at{" "}
         <motion.strong
@@ -88,7 +95,6 @@ const About = memo(() => {
           className="border border-white/[0.06] rounded-lg p-4 bg-[#111116]"
           variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
           whileHover={cardHover}
-          style={{ willChange: "border-color" }}
         >
           <p className="text-zinc-500 text-[10px] sm:text-xs uppercase tracking-widest font-sans mb-1.5">
             Education
@@ -104,7 +110,6 @@ const About = memo(() => {
           className="border border-white/[0.06] rounded-lg p-4 bg-[#111116]"
           variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
           whileHover={cardHover}
-          style={{ willChange: "border-color" }}
         >
           <p className="text-zinc-500 text-[10px] sm:text-xs uppercase tracking-widest font-sans mb-1.5">
             Focus

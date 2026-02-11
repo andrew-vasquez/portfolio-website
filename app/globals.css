@@ -115,6 +115,12 @@
   will-change: auto;
 }
 
+/* Defer rendering of off-screen sections */
+.below-fold-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
 /* Preload critical animations */
 @media (prefers-reduced-motion: no-preference) {
   .motion-preload {

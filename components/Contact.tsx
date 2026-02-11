@@ -5,30 +5,38 @@ import { memo } from "react";
 import { Mail } from "lucide-react";
 import { variants, transitions, viewportConfig, easing } from "@/lib/animations";
 
+const contactSectionVariantsDefault = {
+  initial: { opacity: 0, y: 20 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { ...transitions.medium, staggerChildren: 0.1 },
+  },
+};
+
+const contactSectionVariantsReduced = {
+  initial: { opacity: 0, y: 0 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { ...transitions.medium, staggerChildren: 0.1 },
+  },
+};
+
+const linkHoverEnabled = { y: -2, transition: { duration: 0.2, ease: easing.smooth } };
+
 const Contact = memo(() => {
   const shouldReduceMotion = useReducedMotion();
-
-  const sectionVariants = {
-    initial: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: { ...transitions.medium, staggerChildren: 0.1 },
-    },
-  };
-
-  const linkHover = shouldReduceMotion
-    ? {}
-    : { y: -2, transition: { duration: 0.2, ease: easing.smooth } };
+  const sectionVariants = shouldReduceMotion ? contactSectionVariantsReduced : contactSectionVariantsDefault;
+  const linkHover = shouldReduceMotion ? {} : linkHoverEnabled;
 
   return (
     <motion.section
-      className="my-12 sm:my-20"
+      className="my-12 sm:my-20 below-fold-section"
       variants={sectionVariants}
       initial="initial"
       whileInView="animate"
       viewport={viewportConfig}
-      style={{ willChange: "opacity, transform" }}
     >
       <motion.h2
         className="text-xl sm:text-2xl font-bold pb-1 text-balance"
@@ -41,13 +49,12 @@ const Contact = memo(() => {
         className="mb-4 border-white/10"
         variants={variants.scaleX}
         transition={transitions.medium}
-        style={{ transformOrigin: "left", willChange: "transform" }}
+        style={{ transformOrigin: "left" }}
       />
       <motion.p
         className="text-base sm:text-lg leading-7 sm:leading-8 mt-4 text-pretty text-zinc-400"
         variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
         transition={transitions.medium}
-        style={{ willChange: "opacity, transform" }}
       >
         I&apos;m always interested in hearing about new projects and
         opportunities. Whether you want to collaborate on something or just say
@@ -62,7 +69,6 @@ const Contact = memo(() => {
           href="mailto:avasdev98@gmail.com"
           className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-white/[0.06] bg-[#111116] rounded-lg text-sm font-sans text-zinc-300 hover:text-white hover:border-white/10 hover:bg-[#161619] transition-colors focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f]"
           whileHover={linkHover}
-          style={{ willChange: "transform" }}
         >
           <Mail className="w-4 h-4" aria-hidden="true" />
           Email

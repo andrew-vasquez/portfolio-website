@@ -11,23 +11,22 @@ import {
   viewportConfig,
 } from "@/lib/animations";
 
-const Projects = memo(() => {
-  const sectionVariants = {
-    initial: { opacity: 0 },
-    animate: {
-      opacity: 1,
-      transition: { ...transitions.medium, staggerChildren: 0.08 },
-    },
-  };
+const sectionVariants = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: 1,
+    transition: { ...transitions.medium, staggerChildren: 0.08 },
+  },
+};
 
+const Projects = memo(() => {
   return (
     <motion.section
-      className="my-20"
+      className="my-20 below-fold-section"
       variants={sectionVariants}
       initial="initial"
       whileInView="animate"
       viewport={viewportConfig}
-      style={{ willChange: "opacity" }}
     >
       <motion.h2
         className="text-2xl font-bold pb-1 text-balance"
@@ -40,7 +39,7 @@ const Projects = memo(() => {
         className="mb-4 border-white/10"
         variants={variants.scaleX}
         transition={transitions.medium}
-        style={{ transformOrigin: "left", willChange: "transform" }}
+        style={{ transformOrigin: "left" }}
       />
       <motion.div
         variants={staggerContainer}

@@ -28,7 +28,6 @@ const Icons = memo(({ name, image }: IconsProps) => {
         className="inline-flex flex-col justify-center items-center p-2 border rounded-md border-white/[0.06] bg-[#18181b] focus-visible:ring-2 focus-visible:ring-zinc-400"
         whileHover={hoverVariants}
         whileTap={{ scale: 0.95 }}
-        style={{ willChange: "transform, border-color, background-color" }}
         role="img"
         aria-label={name}
       >

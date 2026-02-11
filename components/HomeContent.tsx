@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
+import dynamic from "next/dynamic";
 import About from "@/components/About";
 import Navbar from "@/components/Navbar";
 import Name from "@/components/Name";
@@ -9,17 +10,21 @@ import Projects from "@/components/Projects";
 import Footer from "@/components/Footer";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
-import PixelSnow from "@/components/PixelSnow";
 import { variants, transitions, staggerContainer } from "@/lib/animations";
+
+const PixelSnow = dynamic(() => import("@/components/PixelSnow"), {
+  ssr: false,
+});
 
 function useIsMobile(breakpoint = 768) {
   const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < breakpoint);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    const mql = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
   }, [breakpoint]);
 
   return isMobile;
@@ -40,7 +45,7 @@ export default function HomeContent() {
         <PixelSnow
           color="#ffffff"
           variant="square"
-          pixelResolution={isMobile ? 200 : 450}
+          pixelResolution={isMobile ? 200 : 500}
           speed={1.25}
           density={0.3}
           flakeSize={0.01}
@@ -58,12 +63,10 @@ export default function HomeContent() {
         variants={staggerContainer}
         initial="initial"
         animate="animate"
-        style={{ willChange: "transform, opacity" }}
       >
         <motion.header
           variants={variants.slideDown}
           transition={transitions.spring}
-          style={{ willChange: "transform, opacity" }}
         >
           <Navbar />
           <Name />
@@ -73,7 +76,6 @@ export default function HomeContent() {
           id="main-content"
           variants={variants.fadeIn}
           transition={transitions.medium}
-          style={{ willChange: "opacity" }}
         >
           <About />
           <Projects />
@@ -84,7 +86,6 @@ export default function HomeContent() {
         <motion.footer
           variants={variants.slideUp}
           transition={transitions.spring}
-          style={{ willChange: "transform, opacity" }}
         >
           <Footer />
         </motion.footer>
