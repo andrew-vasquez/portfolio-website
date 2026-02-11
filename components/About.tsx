@@ -19,8 +19,8 @@ const About = memo(() => {
   const cardHover = shouldReduceMotion
     ? {}
     : {
-        borderColor: "rgba(255, 255, 255, 0.12)",
-        backgroundColor: "rgba(255, 255, 255, 0.04)",
+        borderColor: "rgba(255, 255, 255, 0.1)",
+        backgroundColor: "#161619",
         transition: { duration: 0.2, ease: easing.smooth },
       };
 
@@ -85,7 +85,7 @@ const About = memo(() => {
         transition={transitions.medium}
       >
         <motion.div
-          className="border border-white/[0.06] rounded-lg p-4 bg-white/[0.03] backdrop-blur-sm"
+          className="border border-white/[0.06] rounded-lg p-4 bg-[#111116]"
           variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
           whileHover={cardHover}
           style={{ willChange: "border-color" }}
@@ -101,7 +101,7 @@ const About = memo(() => {
           </p>
         </motion.div>
         <motion.div
-          className="border border-white/[0.06] rounded-lg p-4 bg-white/[0.03] backdrop-blur-sm"
+          className="border border-white/[0.06] rounded-lg p-4 bg-[#111116]"
           variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
           whileHover={cardHover}
           style={{ willChange: "border-color" }}

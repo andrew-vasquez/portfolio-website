@@ -39,8 +39,8 @@ const ProjectCard = ({
     ? {}
     : {
         y: -4,
-        borderColor: "rgba(255, 255, 255, 0.12)",
-        backgroundColor: "rgba(255, 255, 255, 0.04)",
+        borderColor: "rgba(255, 255, 255, 0.1)",
+        backgroundColor: "#161619",
         transition: { duration: 0.3, ease: easing.smooth },
       };
 
@@ -53,7 +53,7 @@ const ProjectCard = ({
       viewport={{ once: true, margin: "-50px" }}
     >
       <motion.div
-        className="border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm p-8 rounded-lg flex flex-col-reverse md:flex-row justify-between mb-7 h-full min-h-[400px] md:min-h-[200px] relative"
+        className="border border-white/[0.06] bg-[#111116] p-8 rounded-lg flex flex-col-reverse md:flex-row justify-between mb-7 h-full min-h-[400px] md:min-h-[200px] relative"
         whileHover={hoverVariants}
         style={{ willChange: "transform, border-color, background-color" }}
       >

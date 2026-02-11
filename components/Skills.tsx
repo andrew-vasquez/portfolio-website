@@ -41,7 +41,8 @@ const Skills = () => {
   const cardHover = shouldReduceMotion
     ? {}
     : {
-        borderColor: "rgba(255, 255, 255, 0.12)",
+        borderColor: "rgba(255, 255, 255, 0.1)",
+        backgroundColor: "#161619",
         transition: { duration: 0.2, ease: easing.smooth },
       };
 
@@ -53,7 +54,7 @@ const Skills = () => {
     skills: { name: string; image: string }[];
   }) => (
     <motion.div
-      className="border border-white/[0.06] rounded-lg p-4 sm:p-5 mt-4 bg-white/[0.03] backdrop-blur-sm"
+      className="border border-white/[0.06] rounded-lg p-4 sm:p-5 mt-4 bg-[#111116]"
       initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={viewportConfig}
