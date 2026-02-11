@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import About from "@/components/About";
 import Navbar from "@/components/Navbar";
@@ -8,11 +9,47 @@ import Projects from "@/components/Projects";
 import Footer from "@/components/Footer";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
+import PixelSnow from "@/components/PixelSnow";
 import { variants, transitions, staggerContainer } from "@/lib/animations";
 
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < breakpoint);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, [breakpoint]);
+
+  return isMobile;
+}
+
 export default function HomeContent() {
+  const isMobile = useIsMobile();
+
   return (
     <>
+      <motion.div
+        className="fixed inset-0 z-0"
+        aria-hidden="true"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
+      >
+        <PixelSnow
+          color="#ffffff"
+          variant="square"
+          pixelResolution={isMobile ? 200 : 350}
+          speed={1.25}
+          density={0.3}
+          flakeSize={0.01}
+          brightness={1}
+          depthFade={8}
+          farPlane={20}
+          direction={125}
+        />
+      </motion.div>
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>

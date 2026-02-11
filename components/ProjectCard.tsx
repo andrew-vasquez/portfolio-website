@@ -66,7 +66,7 @@ const ProjectCard = ({
         <div className="flex-1 flex flex-col justify-between">
           <div>
             <motion.a
-              className="text-xl inline-flex items-center gap-2 hover:opacity-60 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#202023] rounded transition-opacity mb-2"
+              className="text-xl inline-flex items-center gap-2 hover:opacity-60 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f] rounded transition-opacity mb-2"
               target="_blank"
               rel="noopener noreferrer"
               href={link}

@@ -61,7 +61,7 @@ const Contact = memo(() => {
       >
         <motion.a
           href="mailto:avasdev98@gmail.com"
-          className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-zinc-600 rounded-lg text-sm font-sans text-zinc-300 hover:text-white hover:border-zinc-400 transition-colors focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#202023]"
+          className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-zinc-600 rounded-lg text-sm font-sans text-zinc-300 hover:text-white hover:border-zinc-400 transition-colors focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f]"
           whileHover={linkHover}
           style={{ willChange: "transform" }}
         >
@@ -72,7 +72,7 @@ const Contact = memo(() => {
           href="https://github.com/andrew-vasquez"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-zinc-600 rounded-lg text-sm font-sans text-zinc-300 hover:text-white hover:border-zinc-400 transition-colors focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#202023]"
+          className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-zinc-600 rounded-lg text-sm font-sans text-zinc-300 hover:text-white hover:border-zinc-400 transition-colors focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f]"
           whileHover={linkHover}
           style={{ willChange: "transform" }}
         >
@@ -89,7 +89,7 @@ const Contact = memo(() => {
           href="https://www.linkedin.com/in/andrew-vasquez-000434237/"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-zinc-600 rounded-lg text-sm font-sans text-zinc-300 hover:text-white hover:border-zinc-400 transition-colors focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#202023]"
+          className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-zinc-600 rounded-lg text-sm font-sans text-zinc-300 hover:text-white hover:border-zinc-400 transition-colors focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f]"
           whileHover={linkHover}
           style={{ willChange: "transform" }}
         >
