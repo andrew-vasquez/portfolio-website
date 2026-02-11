@@ -20,6 +20,8 @@ const sectionVariants = {
 };
 
 const Projects = memo(() => {
+  const [featured, ...rest] = projectData;
+
   return (
     <motion.section
       className="my-20 below-fold-section"
@@ -41,16 +43,39 @@ const Projects = memo(() => {
         transition={transitions.medium}
         style={{ transformOrigin: "left" }}
       />
+
+      {/* Featured project — full width */}
       <motion.div
         variants={staggerContainer}
         initial="initial"
         whileInView="animate"
         viewport={viewportConfig}
       >
-        {projectData.map((project, index) => (
+        <ProjectCard
+          key={featured.title}
+          number={1}
+          title={featured.title}
+          description={featured.description}
+          image={featured.image}
+          icons={featured.icons}
+          iconName={featured.iconName}
+          link={featured.link}
+          featured
+        />
+      </motion.div>
+
+      {/* Remaining projects — 2-column grid */}
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2 gap-5"
+        variants={staggerContainer}
+        initial="initial"
+        whileInView="animate"
+        viewport={viewportConfig}
+      >
+        {rest.map((project, index) => (
           <ProjectCard
             key={project.title}
-            number={index + 1}
+            number={index + 2}
             title={project.title}
             description={project.description}
             image={project.image}

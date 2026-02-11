@@ -13,6 +13,7 @@ interface ProjectCardProps {
   iconName: string[];
   link: string;
   number: number;
+  featured?: boolean;
 }
 
 const cardVariants = {
@@ -31,6 +32,11 @@ const hoverVariantsEnabled = {
   transition: { duration: 0.3, ease: easing.smooth },
 };
 
+const iconHoverEnabled = {
+  scale: 1.1,
+  transition: { duration: 0.2, ease: easing.smooth },
+};
+
 const ProjectCard = ({
   title,
   description,
@@ -39,9 +45,9 @@ const ProjectCard = ({
   iconName,
   link,
   number,
+  featured = false,
 }: ProjectCardProps) => {
   const shouldReduceMotion = useReducedMotion();
-
   const hoverVariants = shouldReduceMotion ? {} : hoverVariantsEnabled;
 
   return (
@@ -53,16 +59,41 @@ const ProjectCard = ({
       viewport={{ once: true, margin: "-50px" }}
     >
       <motion.div
-        className="border border-white/[0.06] bg-[#111116] p-8 rounded-lg flex flex-col-reverse md:flex-row justify-between mb-7 h-full min-h-[400px] md:min-h-[200px] relative"
+        className={`border border-white/[0.06] bg-[#111116] rounded-lg flex flex-col relative ${
+          featured ? "p-0 overflow-hidden mb-5" : "p-6 mb-5 h-full"
+        }`}
         whileHover={hoverVariants}
       >
-        <span
-          className="absolute top-4 left-4 text-zinc-700 text-[10px] font-sans tracking-[0.25em] select-none tabular-nums"
-          aria-hidden="true"
+        {/* Screenshot */}
+        <motion.div
+          className={featured ? "" : "mb-4"}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1, ease: easing.smooth }}
         >
-          {String(number).padStart(2, "0")}
-        </span>
-        <div className="flex-1 min-w-0 flex flex-col justify-between">
+          <Image
+            src={image}
+            alt={`Screenshot of ${title} project`}
+            width={672}
+            height={featured ? 384 : 300}
+            className={`w-full object-cover shadow-xl ${
+              featured
+                ? "h-48 sm:h-64"
+                : "h-40 rounded-lg"
+            }`}
+            loading={featured ? "eager" : "lazy"}
+          />
+        </motion.div>
+
+        {/* Content */}
+        <div className={`flex-1 min-w-0 flex flex-col ${featured ? "p-6 pt-4" : ""}`}>
+          <span
+            className="text-zinc-700 text-[10px] font-sans tracking-[0.25em] select-none tabular-nums mb-2"
+            aria-hidden="true"
+          >
+            {String(number).padStart(2, "0")}
+          </span>
           <div>
             <motion.a
               className="text-xl inline-flex items-center gap-2 hover:opacity-60 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f] rounded transition-opacity mb-2"
@@ -92,7 +123,7 @@ const ProjectCard = ({
                         transition: { duration: 0.2, ease: easing.bounce },
                       }
                 }
-                >
+              >
                 <SquareArrowUpRight className="w-5 h-5" />
               </motion.span>
             </motion.a>
@@ -107,7 +138,7 @@ const ProjectCard = ({
             </motion.p>
           </div>
           <motion.div
-            className="flex items-center gap-3"
+            className="flex items-center gap-3 mt-auto"
             initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -116,15 +147,8 @@ const ProjectCard = ({
             {icons.map((icon, index) => (
               <motion.div
                 key={`${title}-icon-${index}`}
-                whileHover={
-                  shouldReduceMotion
-                    ? {}
-                    : {
-                        scale: 1.1,
-                        transition: { duration: 0.2, ease: easing.smooth },
-                      }
-                }
-                >
+                whileHover={shouldReduceMotion ? {} : iconHoverEnabled}
+              >
                 <Image
                   src={icon}
                   alt={iconName[index]}
@@ -136,21 +160,6 @@ const ProjectCard = ({
             ))}
           </motion.div>
         </div>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1, ease: easing.smooth }}
-        >
-          <Image
-            src={image}
-            alt={`Screenshot of ${title} project`}
-            width={208}
-            height={128}
-            className="w-full h-48 mb-5 shadow-xl rounded-lg md:w-52 md:h-32 md:mb-0 object-cover"
-            loading="lazy"
-          />
-        </motion.div>
       </motion.div>
     </motion.article>
   );

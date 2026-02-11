@@ -54,43 +54,27 @@ const About = memo(() => {
         transition={transitions.medium}
         style={{ transformOrigin: "left" }}
       />
-      <motion.p
-        className="text-base sm:text-lg leading-7 sm:leading-8 mt-4 text-pretty text-zinc-400"
-        variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
-        transition={transitions.medium}
-      >
-        Currently a student at{" "}
-        <motion.strong
-          className="font-medium text-zinc-100"
-          whileHover={
-            shouldReduceMotion
-              ? {}
-              : { color: "#ffffff", transition: { duration: 0.15 } }
-          }
-        >
-          Western Governors University
-        </motion.strong>{" "}
-        pursuing a degree in{" "}
-        <motion.strong
-          className="font-medium text-zinc-100"
-          whileHover={
-            shouldReduceMotion
-              ? {}
-              : { color: "#ffffff", transition: { duration: 0.15 } }
-          }
-        >
-          Software Engineering
-        </motion.strong>
-        . I have a passion for learning and building applications that solve
-        real-world problems. I enjoy working with modern web technologies and am
-        always looking to expand my skill set.
-      </motion.p>
 
       <motion.div
-        className="grid grid-cols-2 gap-3 mt-8"
+        className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4"
         variants={variants.fadeIn}
         transition={transitions.medium}
       >
+        {/* Intro — full width */}
+        <motion.div
+          className="sm:col-span-3 border border-white/[0.06] rounded-lg p-4 sm:p-5 bg-[#111116]"
+          variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
+          whileHover={cardHover}
+        >
+          <p className="text-base sm:text-lg leading-7 sm:leading-8 text-pretty text-zinc-400">
+            Software engineering student at{" "}
+            <strong className="font-medium text-zinc-100">WGU</strong> who
+            builds full-stack web apps. I enjoy solving real-world problems with
+            modern tools and am always looking to learn something new.
+          </p>
+        </motion.div>
+
+        {/* Education */}
         <motion.div
           className="border border-white/[0.06] rounded-lg p-4 bg-[#111116]"
           variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
@@ -106,20 +90,42 @@ const About = memo(() => {
             Western Governors University
           </p>
         </motion.div>
+
+        {/* Stack */}
         <motion.div
           className="border border-white/[0.06] rounded-lg p-4 bg-[#111116]"
           variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
           whileHover={cardHover}
         >
           <p className="text-zinc-500 text-[10px] sm:text-xs uppercase tracking-widest font-sans mb-1.5">
-            Focus
+            Stack
           </p>
           <p className="text-zinc-200 text-sm sm:text-base leading-snug">
-            Full-Stack Development
+            React &middot; TypeScript &middot; Next.js
           </p>
           <p className="text-zinc-500 text-xs sm:text-sm mt-0.5">
-            React &middot; TypeScript &middot; Node.js
+            Node.js &middot; PostgreSQL &middot; Tailwind
           </p>
+        </motion.div>
+
+        {/* Status */}
+        <motion.div
+          className="border border-white/[0.06] rounded-lg p-4 bg-[#111116]"
+          variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
+          whileHover={cardHover}
+        >
+          <p className="text-zinc-500 text-[10px] sm:text-xs uppercase tracking-widest font-sans mb-1.5">
+            Status
+          </p>
+          <div className="flex items-center gap-2">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400/75 animate-ping motion-reduce:animate-none" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            </span>
+            <p className="text-zinc-200 text-sm sm:text-base leading-snug">
+              Open to opportunities
+            </p>
+          </div>
         </motion.div>
       </motion.div>
     </motion.section>
