@@ -6,6 +6,7 @@ import Icons from "./Icons";
 import {
   variants,
   transitions,
+  easing,
   staggerContainer,
   viewportConfig,
 } from "@/lib/animations";
@@ -48,6 +49,13 @@ const Skills = () => {
     },
   };
 
+  const cardHover = shouldReduceMotion
+    ? {}
+    : {
+        borderColor: "#52525b",
+        transition: { duration: 0.2, ease: easing.smooth },
+      };
+
   const SkillGroup = ({
     title,
     skills,
@@ -57,9 +65,14 @@ const Skills = () => {
     skills: { name: string; image: string }[];
     delay?: number;
   }) => (
-    <>
+    <motion.div
+      className="border border-zinc-700/50 rounded-lg p-4 sm:p-5 mt-4 bg-zinc-900/30"
+      variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
+      whileHover={cardHover}
+      style={{ willChange: "border-color" }}
+    >
       <motion.h3
-        className="text-lg sm:text-xl font-medium pt-3 pb-4 sm:pb-5"
+        className="text-lg sm:text-xl font-medium pb-4 sm:pb-5"
         variants={variants.slideLeft}
         transition={{ ...transitions.fast, delay }}
       >
@@ -86,7 +99,7 @@ const Skills = () => {
           </motion.div>
         ))}
       </motion.div>
-    </>
+    </motion.div>
   );
 
   return (

@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { memo } from "react";
+import { Mail } from "lucide-react";
 import Image from "next/image";
 import { variants, transitions, viewportConfig, easing } from "@/lib/animations";
 
@@ -58,6 +59,15 @@ const Contact = memo(() => {
         variants={variants.slideUp}
         transition={{ ...transitions.medium, delay: 0.1 }}
       >
+        <motion.a
+          href="mailto:avasdev98@gmail.com"
+          className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-zinc-600 rounded-lg text-sm font-sans text-zinc-300 hover:text-white hover:border-zinc-400 transition-colors focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#202023]"
+          whileHover={linkHover}
+          style={{ willChange: "transform" }}
+        >
+          <Mail className="w-4 h-4" aria-hidden="true" />
+          Email
+        </motion.a>
         <motion.a
           href="https://github.com/andrew-vasquez"
           target="_blank"

@@ -58,7 +58,7 @@ const ProjectCard = ({
         style={{ willChange: "transform, box-shadow" }}
       >
         <span
-          className="absolute top-4 right-4 text-zinc-700 text-[10px] font-sans tracking-[0.25em] select-none"
+          className="absolute top-4 left-4 text-zinc-700 text-[10px] font-sans tracking-[0.25em] select-none"
           aria-hidden="true"
         >
           {String(number).padStart(2, "0")}
