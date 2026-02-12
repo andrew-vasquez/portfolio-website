@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `bun dev` — Start dev server with Turbopack (Next.js 16)
 - `bun run build` — Production build
 - `bun run start` — Serve production build
-- `bun run lint` — ESLint via `next lint` (extends `next/core-web-vitals`)
+- `bun run lint` — Run ESLint on the project (via `eslint .`)
 - No test framework is configured
 
 ## Architecture
