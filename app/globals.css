@@ -71,13 +71,24 @@
   contain: layout style;
 }
 
-/* Defer rendering of off-screen sections */
+/* Defer rendering of off-screen sections
+ * Intrinsic size provides a height estimate for content-visibility: auto
+ * to prevent layout shift when sections enter/exit viewport.
+ * Default is tuned for Skills section (~400-500px).
+ * Override per-section if needed for accuracy.
+ */
 .below-fold-section {
   content-visibility: auto;
-  contain-intrinsic-size: 0 500px;
+  contain-intrinsic-size: 0 var(--section-intrinsic-height, 500px);
 }
 
 @theme inline {
+  /* Section intrinsic heights for content-visibility optimization */
+  --section-intrinsic-height: 500px;
+  --section-intrinsic-height-projects: 900px;
+  --section-intrinsic-height-skills: 500px;
+  --section-intrinsic-height-contact: 250px;
+  
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
