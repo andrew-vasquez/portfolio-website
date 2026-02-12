@@ -26,9 +26,7 @@ const Footer = () => {
         <p className="text-zinc-400 text-sm">
           &copy; {CURRENT_YEAR} Andrew Vasquez
         </p>
-        <p className="text-zinc-600 text-xs mt-1.5 font-sans">
-          Built with Next.js &amp; Tailwind CSS
-        </p>
+        
       </motion.div>
     </>
   );
