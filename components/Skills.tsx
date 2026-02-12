@@ -66,7 +66,7 @@ const SkillGroup = ({
 );
 
 const Skills = () => {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useReducedMotion() ?? false;
 
   return (
     <motion.section
