@@ -178,6 +178,7 @@ export default function PixelSnow({
   flakeSize = 0.01,
   minFlakeSize = 1.25,
   pixelResolution = 200,
+  maxFps = 40,
   speed = 1.25,
   depthFade = 8,
   farPlane = 20,
@@ -190,7 +191,7 @@ export default function PixelSnow({
   style = {}
 }) {
   const containerRef = useRef(null);
-  const animationRef = useRef(0);
+  const animationRef = useRef(null);
   const isVisibleRef = useRef(true);
   const rendererRef = useRef(null);
   const materialRef = useRef(null);
@@ -225,22 +226,6 @@ export default function PixelSnow({
     }, 100);
   }, []);
 
-  // Visibility observer
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isVisibleRef.current = entry.isIntersecting;
-      },
-      { threshold: 0 }
-    );
-
-    observer.observe(container);
-    return () => observer.disconnect();
-  }, []);
-
   // Main Three.js setup - only runs once
   useEffect(() => {
     const container = containerRef.current;
@@ -252,12 +237,12 @@ export default function PixelSnow({
       antialias: false,
       alpha: true,
       premultipliedAlpha: false,
-      powerPreference: 'high-performance',
+      powerPreference: 'default',
       stencil: false,
       depth: false
     });
 
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(1);
     renderer.setSize(container.offsetWidth, container.offsetHeight);
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
@@ -292,16 +277,21 @@ export default function PixelSnow({
     window.addEventListener('resize', handleResize);
 
     const startTime = performance.now();
+    const frameIntervalMs = 1000 / Math.max(1, maxFps);
+    let lastFrameTime = 0;
 
-    const animate = () => {
+    const animate = (now) => {
       // If not visible, stop the animation loop and do not schedule another frame.
       if (!isVisibleRef.current) {
         animationRef.current = null;
         return;
       }
 
-      material.uniforms.uTime.value = (performance.now() - startTime) * 0.001;
-      renderer.render(scene, camera);
+      if (lastFrameTime === 0 || now - lastFrameTime >= frameIntervalMs) {
+        material.uniforms.uTime.value = (now - startTime) * 0.001;
+        renderer.render(scene, camera);
+        lastFrameTime = now;
+      }
 
       animationRef.current = requestAnimationFrame(animate);
     };
@@ -312,6 +302,7 @@ export default function PixelSnow({
       if (entry.isIntersecting) {
         // Start the animation loop if it is not already running.
         if (!animationRef.current) {
+          lastFrameTime = 0;
           animationRef.current = requestAnimationFrame(animate);
         }
       } else {
@@ -345,7 +336,7 @@ export default function PixelSnow({
       materialRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [handleResize]); // Only recreate scene when handleResize changes
+  }, [handleResize, maxFps]); // Recreate scene only when resize handling or target FPS changes
 
   // Update material uniforms when props change
   useEffect(() => {
