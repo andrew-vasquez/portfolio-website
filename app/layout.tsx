@@ -58,7 +58,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#202023",
+  themeColor: "#0a0a0f",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -70,8 +70,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={lora.variable} suppressHydrationWarning>
-      <body className="min-h-screen bg-[#202023] antialiased">{children}</body>
+    <html lang="en" className={`dark ${lora.variable}`} suppressHydrationWarning>
+      <body className="min-h-screen antialiased">{children}</body>
     </html>
   );
 }

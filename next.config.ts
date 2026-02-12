@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
   },
 
   // Enable experimental features for better performance
+  reactCompiler: true,
+
   experimental: {
     optimizePackageImports: ["lucide-react", "motion"],
   },

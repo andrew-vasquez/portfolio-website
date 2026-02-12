@@ -52,7 +52,6 @@ const Navbar = () => {
         initial={{ opacity: 0, x: -10 }}
         animate={imagesLoaded ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.3, delay: 0.05, ease: "easeOut" }}
-        whileHover={{ scale: 1.02, transition: { duration: 0.15 } }}
       >
         <Image
           className="w-32 sm:w-52 pr-2 sm:pr-5"
@@ -66,7 +65,7 @@ const Navbar = () => {
 
       <div className="flex gap-1 sm:gap-2 items-center">
         <motion.a
-          className="w-10 sm:w-12 hover:bg-zinc-900 hover:border-zinc-500 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#202023] p-1.5 sm:p-2 rounded-md border border-transparent transition-colors"
+          className="w-10 sm:w-12 hover:bg-zinc-900 hover:border-zinc-500 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f] p-1.5 sm:p-2 rounded-md border border-transparent transition-colors"
           target="_blank"
           rel="noopener noreferrer"
           href="https://github.com/andrew-vasquez"
@@ -85,7 +84,7 @@ const Navbar = () => {
           />
         </motion.a>
         <motion.a
-          className="w-10 sm:w-12 hover:bg-zinc-900 hover:border-zinc-500 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#202023] p-1.5 sm:p-2 rounded-md border border-transparent transition-colors"
+          className="w-10 sm:w-12 hover:bg-zinc-900 hover:border-zinc-500 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f] p-1.5 sm:p-2 rounded-md border border-transparent transition-colors"
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.linkedin.com/in/andrew-vasquez-000434237/"
