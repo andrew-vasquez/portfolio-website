@@ -26,7 +26,7 @@ const skillsData = {
   ],
   tools: [
     { name: "Git", image: "/icons/git.svg" },
-    { name: "Github", image: "/icons/github.svg" },
+    { name: "GitHub", image: "/icons/github.svg" },
     { name: "VSCode", image: "/icons/vscode.svg" },
   ],
 };
