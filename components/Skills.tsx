@@ -44,7 +44,7 @@ const SkillGroup = ({
 }: {
   title: string;
   skills: { name: string; image: string }[];
-  shouldReduceMotion: boolean | null;
+  shouldReduceMotion: boolean;
 }) => (
   <motion.div
     className="border border-white/[0.06] rounded-lg p-4 sm:p-5 mt-4 bg-[#111116]"
