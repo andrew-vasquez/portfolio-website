@@ -71,6 +71,7 @@ const Skills = () => {
   return (
     <motion.section
       className="my-12 sm:my-20 below-fold-section"
+      style={{ "--section-intrinsic-height": "var(--section-intrinsic-height-skills)" } as React.CSSProperties}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={viewportConfig}

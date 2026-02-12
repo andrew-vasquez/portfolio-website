@@ -33,6 +33,7 @@ const Contact = memo(() => {
   return (
     <motion.section
       className="my-12 sm:my-20 below-fold-section"
+      style={{ "--section-intrinsic-height": "var(--section-intrinsic-height-contact)" } as React.CSSProperties}
       variants={sectionVariants}
       initial="initial"
       whileInView="animate"

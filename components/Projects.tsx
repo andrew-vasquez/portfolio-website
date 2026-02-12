@@ -25,6 +25,7 @@ const Projects = memo(() => {
   return (
     <motion.section
       className="my-20 below-fold-section"
+      style={{ "--section-intrinsic-height": "var(--section-intrinsic-height-projects)" } as React.CSSProperties}
       variants={sectionVariants}
       initial="initial"
       whileInView="animate"
