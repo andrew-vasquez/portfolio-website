@@ -292,19 +292,45 @@ export default function PixelSnow({
     window.addEventListener('resize', handleResize);
 
     const startTime = performance.now();
-    const animate = () => {
-      animationRef.current = requestAnimationFrame(animate);
 
-      // Only render if visible
-      if (isVisibleRef.current) {
-        material.uniforms.uTime.value = (performance.now() - startTime) * 0.001;
-        renderer.render(scene, camera);
+    const animate = () => {
+      // If not visible, stop the animation loop and do not schedule another frame.
+      if (!isVisibleRef.current) {
+        animationRef.current = null;
+        return;
       }
+
+      material.uniforms.uTime.value = (performance.now() - startTime) * 0.001;
+      renderer.render(scene, camera);
+
+      animationRef.current = requestAnimationFrame(animate);
     };
-    animate();
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisibleRef.current = entry.isIntersecting;
+
+      if (entry.isIntersecting) {
+        // Start the animation loop if it is not already running.
+        if (!animationRef.current) {
+          animationRef.current = requestAnimationFrame(animate);
+        }
+      } else {
+        // Stop the animation loop when not visible.
+        if (animationRef.current) {
+          cancelAnimationFrame(animationRef.current);
+          animationRef.current = null;
+        }
+      }
+    });
+
+    observer.observe(container);
 
     return () => {
-      cancelAnimationFrame(animationRef.current);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
+      }
+      observer.disconnect();
       window.removeEventListener('resize', handleResize);
       if (resizeTimeoutRef.current) {
         clearTimeout(resizeTimeoutRef.current);
