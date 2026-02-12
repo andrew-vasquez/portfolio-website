@@ -49,7 +49,8 @@ export default function HomeContent() {
         <PixelSnow
           color="#ffffff"
           variant="square"
-          pixelResolution={isMobile ? 200 : 800}
+          pixelResolution={isMobile ? 200 : 500}
+          maxFps={isMobile ? 28 : 40}
           speed={1.25}
           density={0.3}
           flakeSize={0.01}
