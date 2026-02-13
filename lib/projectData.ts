@@ -24,6 +24,6 @@ export const projectData = [
     image: "/projects/poketeambuilder.webp",
     icons: ["/icons/react.svg", "/icons/tailwind.svg"],
     iconName: ["React", "Tailwind"],
-    link: "https://poketeambuild.netlify.app/",
+    link: "https://poke-builder.vercel.app/",
   },
 ];
