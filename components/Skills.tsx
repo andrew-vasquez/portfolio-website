@@ -21,6 +21,7 @@ const skillsData = {
   backEnd: [
     { name: "Node.js", image: "/icons/nodejs.svg" },
     { name: "Python", image: "/icons/python.svg" },
+    { name: "Hono", image: "/icons/hono.svg" },
     { name: "PostgreSQL", image: "/icons/postgresql.svg" },
     { name: "Prisma", image: "/icons/prisma.svg" },
   ],

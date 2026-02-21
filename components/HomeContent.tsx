@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useSyncExternalStore } from "react";
 import { motion } from "motion/react";
 import dynamic from "next/dynamic";
 import About from "@/components/About";
@@ -17,21 +17,15 @@ const PixelSnow = dynamic(() => import("@/components/PixelSnow"), {
 });
 
 function useIsMobile(breakpoint = 768) {
-  const getMatches = () =>
-    typeof window !== "undefined"
-      ? window.matchMedia(`(max-width: ${breakpoint - 1}px)`).matches
-      : true;
-
-  const [isMobile, setIsMobile] = useState(getMatches);
-
-  useEffect(() => {
-    const mql = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
-  }, [breakpoint]);
-
-  return isMobile;
+  return useSyncExternalStore(
+    (callback) => {
+      const mql = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
+      mql.addEventListener("change", callback);
+      return () => mql.removeEventListener("change", callback);
+    },
+    () => window.matchMedia(`(max-width: ${breakpoint - 1}px)`).matches,
+    () => false,
+  );
 }
 
 export default function HomeContent() {

@@ -81,6 +81,7 @@ const Navbar = () => {
             height={32}
             className="navbar-icon w-full h-auto block"
             aria-hidden="true"
+            priority
           />
         </motion.a>
         <motion.a
@@ -100,6 +101,7 @@ const Navbar = () => {
             height={32}
             className="navbar-icon w-full h-auto block"
             aria-hidden="true"
+            priority
           />
         </motion.a>
       </div>

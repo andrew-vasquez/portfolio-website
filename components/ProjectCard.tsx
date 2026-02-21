@@ -83,6 +83,9 @@ const ProjectCard = ({
                 : "h-40 rounded-lg"
             }`}
             loading={featured ? "eager" : "lazy"}
+            sizes={featured ? "(max-width: 640px) 100vw, 672px" : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 336px"}
+            placeholder="blur"
+            blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPjxyZWN0IGZpbGw9IiMxMTExMTYiIHdpZHRoPSI4IiBoZWlnaHQ9IjgiLz48L3N2Zz4="
           />
         </motion.div>
 
@@ -151,7 +154,7 @@ const ProjectCard = ({
               >
                 <Image
                   src={icon}
-                  alt={iconName[index]}
+                  alt={iconName[index] ?? ""}
                   width={24}
                   height={24}
                   className="w-6 h-6"

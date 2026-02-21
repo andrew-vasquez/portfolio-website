@@ -2,14 +2,14 @@
 
 import { motion } from "motion/react";
 
+const letterVariants = {
+  hidden: { opacity: 0, y: 5 },
+  visible: { opacity: 1, y: 0 },
+};
+
 const Name = () => {
   const name = "Andrew Vasquez";
   const title = "Full-Stack Developer";
-
-  const letterVariants = {
-    hidden: { opacity: 0, y: 5 },
-    visible: { opacity: 1, y: 0 },
-  };
 
   return (
     <motion.div
