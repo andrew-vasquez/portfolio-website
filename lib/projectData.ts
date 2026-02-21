@@ -1,6 +1,6 @@
 export const projectData = [
   {
-    title: "Pokemon Team Builder",
+    title: "SlateDex",
     description:
       "A full-stack AI Pokemon team builder for mainline games with team management, matchup insights, and authenticated saves.",
     image: "/projects/slatedex.webp",
