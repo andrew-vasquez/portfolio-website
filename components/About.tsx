@@ -56,13 +56,13 @@ const About = memo(() => {
       />
 
       <motion.div
-        className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4"
+        className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4"
         variants={variants.fadeIn}
         transition={transitions.medium}
       >
         {/* Intro — full width */}
         <motion.div
-          className="sm:col-span-3 border border-white/[0.06] rounded-lg p-4 sm:p-5 bg-[#111116]"
+          className="sm:col-span-2 border border-white/[0.06] rounded-lg p-4 sm:p-5 bg-[#111116]"
           variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
           whileHover={cardHover}
         >
@@ -106,26 +106,6 @@ const About = memo(() => {
           <p className="text-zinc-500 text-xs sm:text-sm mt-0.5">
             Node.js &middot; PostgreSQL &middot; Tailwind
           </p>
-        </motion.div>
-
-        {/* Status */}
-        <motion.div
-          className="border border-white/[0.06] rounded-lg p-4 bg-[#111116]"
-          variants={shouldReduceMotion ? variants.fadeIn : variants.slideUp}
-          whileHover={cardHover}
-        >
-          <p className="text-zinc-500 text-[10px] sm:text-xs uppercase tracking-widest font-sans mb-1.5">
-            Status
-          </p>
-          <div className="flex items-center gap-2">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400/75 animate-ping motion-reduce:animate-none" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-            </span>
-            <p className="text-zinc-200 text-sm sm:text-base leading-snug">
-              Open to opportunities
-            </p>
-          </div>
         </motion.div>
       </motion.div>
     </motion.section>
