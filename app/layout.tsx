@@ -1,11 +1,32 @@
 import type { Metadata, Viewport } from "next";
-import { Lora } from "next/font/google";
+import {
+  IBM_Plex_Mono,
+  IBM_Plex_Sans,
+  IBM_Plex_Sans_Condensed,
+} from "next/font/google";
 import "./globals.css";
 
-const lora = Lora({
+const plexSans = IBM_Plex_Sans({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
-  variable: "--font-lora",
+  variable: "--font-body",
+  preload: true,
+});
+
+const plexSansCondensed = IBM_Plex_Sans_Condensed({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-display",
+  preload: true,
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+  variable: "--font-mono",
   preload: true,
 });
 
@@ -15,17 +36,18 @@ export const metadata: Metadata = {
     template: "%s | Andrew Vasquez",
   },
   description:
-    "Full-Stack Developer specializing in React, TypeScript, and modern web technologies. View my portfolio and projects.",
+    "Portfolio of Andrew Vasquez, a full-stack developer building product-grade interfaces with React, TypeScript, Next.js, and modern web tooling.",
   authors: [{ name: "Andrew Vasquez" }],
   creator: "Andrew Vasquez",
   keywords: [
     "Andrew Vasquez",
     "Full-Stack Developer",
+    "Frontend Developer",
     "React Developer",
     "TypeScript",
     "Next.js",
     "Portfolio",
-    "Web Developer",
+    "UI Engineer",
   ],
   icons: {
     icon: "/favicon.ico",
@@ -36,13 +58,13 @@ export const metadata: Metadata = {
     siteName: "Andrew Vasquez Portfolio",
     title: "Andrew Vasquez | Full-Stack Developer",
     description:
-      "Full-Stack Developer specializing in React, TypeScript, and modern web technologies.",
+      "Full-stack developer focused on product-grade interfaces, calm motion, and modern frontend systems.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Andrew Vasquez | Full-Stack Developer",
     description:
-      "Full-Stack Developer specializing in React, TypeScript, and modern web technologies.",
+      "Full-stack developer focused on product-grade interfaces, calm motion, and modern frontend systems.",
   },
   robots: {
     index: true,
@@ -58,7 +80,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0f",
+  themeColor: "#07080a",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -70,7 +92,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark ${lora.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`dark ${plexSans.variable} ${plexSansCondensed.variable} ${plexMono.variable}`}
+      suppressHydrationWarning
+    >
       <body className="min-h-screen antialiased">{children}</body>
     </html>
   );

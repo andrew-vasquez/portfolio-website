@@ -178,7 +178,7 @@ export default function PixelSnow({
   flakeSize = 0.01,
   minFlakeSize = 1.25,
   pixelResolution = 200,
-  maxFps = 40,
+  maxFps = 60,
   speed = 1.25,
   depthFade = 8,
   farPlane = 20,
@@ -193,6 +193,7 @@ export default function PixelSnow({
   const containerRef = useRef(null);
   const animationRef = useRef(null);
   const isVisibleRef = useRef(true);
+  const isPageVisibleRef = useRef(true);
   const rendererRef = useRef(null);
   const materialRef = useRef(null);
   const resizeTimeoutRef = useRef(null);
@@ -237,7 +238,7 @@ export default function PixelSnow({
       antialias: false,
       alpha: true,
       premultipliedAlpha: false,
-      powerPreference: 'default',
+      powerPreference: 'high-performance',
       stencil: false,
       depth: false
     });
@@ -281,8 +282,8 @@ export default function PixelSnow({
     let lastFrameTime = 0;
 
     const animate = (now) => {
-      // If not visible, stop the animation loop and do not schedule another frame.
-      if (!isVisibleRef.current) {
+      // Stop work when the page or effect is not visible.
+      if (!isVisibleRef.current || !isPageVisibleRef.current) {
         animationRef.current = null;
         return;
       }
@@ -316,6 +317,26 @@ export default function PixelSnow({
 
     observer.observe(container);
 
+    const handleVisibilityChange = () => {
+      isPageVisibleRef.current = document.visibilityState === 'visible';
+
+      if (isPageVisibleRef.current) {
+        if (isVisibleRef.current && !animationRef.current) {
+          lastFrameTime = 0;
+          animationRef.current = requestAnimationFrame(animate);
+        }
+        return;
+      }
+
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    handleVisibilityChange();
+
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
@@ -323,6 +344,7 @@ export default function PixelSnow({
       }
       observer.disconnect();
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       if (resizeTimeoutRef.current) {
         clearTimeout(resizeTimeoutRef.current);
       }

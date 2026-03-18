@@ -1,54 +1,55 @@
-// Performance-optimized animation configurations
-
-// Custom easing curves for better feel - typed as tuples for Motion
 export const easing = {
-  smooth: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
-  bounce: [0.68, -0.55, 0.265, 1.55] as [number, number, number, number],
+  smooth: [0.22, 0.61, 0.36, 1] as [number, number, number, number],
+  bounce: [0.2, 0.8, 0.2, 1] as [number, number, number, number],
 };
 
-// Optimized viewport settings
 export const viewportConfig = {
   once: true,
-  margin: "-20px",
-  amount: 0.1,
+  margin: "-80px",
+  amount: 0.2,
 };
 
-// Performance-optimized transition presets
 export const transitions = {
-  medium: { duration: 0.4, ease: easing.smooth },
-  spring: { type: "spring" as const, stiffness: 300, damping: 30 },
+  micro: { duration: 0.22, ease: easing.smooth },
+  medium: { duration: 0.5, ease: easing.smooth },
+  hero: { type: "spring" as const, stiffness: 140, damping: 24, mass: 0.9 },
+  spring: { type: "spring" as const, stiffness: 170, damping: 24 },
 };
 
-// Animation variants for consistent behavior
 export const variants = {
   fadeIn: {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
   },
+  blurUp: {
+    initial: { opacity: 0, y: 18, filter: "blur(10px)" },
+    animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+  },
   slideUp: {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
+    initial: { opacity: 0, y: 18, filter: "blur(8px)" },
+    animate: { opacity: 1, y: 0, filter: "blur(0px)" },
   },
   slideDown: {
-    initial: { opacity: 0, y: -20 },
-    animate: { opacity: 1, y: 0 },
+    initial: { opacity: 0, y: -18, filter: "blur(8px)" },
+    animate: { opacity: 1, y: 0, filter: "blur(0px)" },
   },
   slideLeft: {
-    initial: { opacity: 0, x: -20 },
-    animate: { opacity: 1, x: 0 },
+    initial: { opacity: 0, x: -18, filter: "blur(8px)" },
+    animate: { opacity: 1, x: 0, filter: "blur(0px)" },
   },
   scaleX: {
-    initial: { scaleX: 0 },
-    animate: { scaleX: 1 },
+    initial: { scaleX: 0, opacity: 0.5 },
+    animate: { scaleX: 1, opacity: 1 },
   },
 };
 
-// Container animation for staggered children
 export const staggerContainer = {
+  initial: { opacity: 0 },
   animate: {
+    opacity: 1,
     transition: {
-      staggerChildren: 0.05,
-      delayChildren: 0.1,
+      staggerChildren: 0.08,
+      delayChildren: 0.08,
     },
   },
 };
