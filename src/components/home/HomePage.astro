@@ -174,15 +174,15 @@ const getActionLinkClasses = (secondary = false) =>
                   <span class="h-2.5 w-2.5 rounded-full bg-white/18"></span>
                   <span class="h-2.5 w-2.5 rounded-full bg-white/12"></span>
                 </div>
-                <div class="overflow-hidden rounded-[0.75rem] border border-white/10 bg-black/30">
+                <div class="overflow-hidden rounded-[0.75rem] border border-white/10 bg-[#0a0d12]">
                   <Image
                     src={featuredProject.image}
                     alt={`Preview of ${featuredProject.title}`}
-                    width="1440"
-                    height="1008"
+                    width={featuredProject.image.width}
+                    height={featuredProject.image.height}
                     loading="eager"
                     fetchpriority="high"
-                    class="h-full w-full object-cover"
+                    class="h-auto w-full object-contain"
                   />
                 </div>
               </div>
@@ -290,15 +290,15 @@ const getActionLinkClasses = (secondary = false) =>
               data-reveal
               style={`--reveal-delay: ${70 + index * 80}ms;`}
             >
-              <div class="overflow-hidden border-b border-white/10 bg-black/20">
+              <div class="overflow-hidden border-b border-white/10 bg-[#0a0d12]">
                 <Image
                   src={project.image}
                   alt={`Preview of ${project.title}`}
-                  width="1200"
-                  height="900"
+                  width={project.image.width}
+                  height={project.image.height}
                   loading="lazy"
                   decoding="async"
-                  class="h-64 w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.02]"
+                  class="h-auto w-full object-contain transition-transform duration-300 ease-out group-hover:scale-[1.02]"
                 />
               </div>
               <div class="p-6 sm:p-7">
@@ -375,7 +375,7 @@ const getActionLinkClasses = (secondary = false) =>
     <footer class="mx-auto w-full max-w-[1200px] px-4 pb-8 sm:px-6 lg:px-8">
       <div class="flex flex-col gap-3 border-t border-white/10 py-6 text-sm text-white/55 sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; 2026 Andrew Vasquez</p>
-        <p class="font-mono text-[0.72rem] uppercase tracking-[0.22em] text-white/42">Designed and built in Astro</p>
+        
       </div>
     </footer>
   </div>
