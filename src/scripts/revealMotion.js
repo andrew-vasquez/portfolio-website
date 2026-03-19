@@ -5,6 +5,9 @@ const revealSelector = "[data-reveal]";
 
 function markVisible(entry) {
   entry.target.classList.add("is-visible");
+  window.setTimeout(() => {
+    entry.target.style.willChange = "auto";
+  }, 720);
 }
 
 export function initRevealMotion() {
@@ -22,7 +25,10 @@ export function initRevealMotion() {
   }
 
   if (prefersReducedMotion) {
-    nodes.forEach((node) => node.classList.add("is-visible"));
+    nodes.forEach((node) => {
+      node.classList.add("is-visible");
+      node.style.willChange = "auto";
+    });
     return;
   }
 

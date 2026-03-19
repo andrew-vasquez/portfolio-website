@@ -299,6 +299,16 @@
   filter: blur(0);
 }
 
+@media (max-width: 767px) {
+  .motion-item {
+    filter: blur(4px);
+  }
+
+  .hero-word {
+    filter: blur(4px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
