@@ -36,8 +36,8 @@ const getActionLinkClasses = (secondary = false) =>
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <div class="relative z-10">
-    <header class="mx-auto w-full max-w-[1200px] px-4 pt-6 sm:px-6 lg:px-8 lg:pt-8">
-      <div class="surface-card radius-panel flex flex-wrap items-start justify-between gap-4 px-4 py-3 sm:items-center sm:px-5">
+    <header class="safe-top mx-auto w-full max-w-[1200px] px-4 pt-6 sm:px-6 lg:px-8 lg:pt-8">
+      <div class="surface-card radius-panel flex flex-wrap items-start justify-between gap-4 px-4 py-3 md:items-center sm:px-5">
         <div class="flex min-w-0 items-center gap-3">
           <div class="radius-control flex h-11 w-11 items-center justify-center border border-white/10 bg-white/[0.04]">
             <Image
@@ -45,6 +45,7 @@ const getActionLinkClasses = (secondary = false) =>
               alt="Andrew Vasquez initials"
               width="54"
               height="22"
+              sizes="54px"
               loading="eager"
               fetchpriority="high"
               class="h-auto w-[3.4rem] brightness-125 contrast-125"
@@ -55,7 +56,7 @@ const getActionLinkClasses = (secondary = false) =>
             <p class="text-sm text-soft sm:text-[0.95rem]">Full-Stack Developer</p>
           </div>
         </div>
-        <div class="flex w-full shrink-0 items-center justify-end gap-2 sm:w-auto">
+        <div class="flex w-full shrink-0 items-center justify-end gap-2 md:w-auto">
           <a
             href="https://github.com/andrew-vasquez"
             target="_blank"
@@ -89,7 +90,7 @@ const getActionLinkClasses = (secondary = false) =>
 
     <main
       id="main-content"
-      class="mx-auto flex w-full max-w-[1200px] flex-col gap-16 px-4 pb-20 pt-8 sm:px-6 sm:pb-24 lg:gap-20 lg:px-8 lg:pt-12"
+      class="safe-bottom mx-auto flex w-full max-w-[1200px] flex-col gap-16 px-4 pb-20 pt-8 sm:px-6 sm:pb-24 lg:gap-20 lg:px-8 lg:pt-12"
     >
       <section class="relative">
         <div
@@ -127,13 +128,13 @@ const getActionLinkClasses = (secondary = false) =>
         </div>
 
         <div
-          class="motion-item mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
+          class="motion-item mt-8 flex flex-col gap-3 md:flex-row md:flex-wrap md:items-center"
           data-reveal
           style="--reveal-delay: 180ms;"
         >
           <a
             href={heroContent.primaryCta.href}
-            class={`${getActionLinkClasses()} w-full justify-center sm:w-auto`}
+            class={`${getActionLinkClasses()} w-full justify-center md:w-auto`}
           >
             <span>{heroContent.primaryCta.label}</span>
             <svg class="h-4 w-4" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
@@ -142,14 +143,14 @@ const getActionLinkClasses = (secondary = false) =>
             href={heroContent.secondaryCta.href}
             target="_blank"
             rel="noopener noreferrer"
-            class={`${getActionLinkClasses(true)} w-full justify-center sm:w-auto`}
+            class={`${getActionLinkClasses(true)} w-full justify-center md:w-auto`}
           >
             <span>{heroContent.secondaryCta.label}</span>
             <svg class="h-4 w-4" aria-hidden="true"><use href="#icon-mail"></use></svg>
           </a>
         </div>
 
-        <div class="mt-10 grid gap-3 sm:grid-cols-3">
+        <div class="mt-10 grid gap-3 md:grid-cols-3">
           {heroContent.meta.map((item, index) => (
             <div
               class="motion-item surface-card radius-card px-4 py-4 text-sm leading-6 text-soft"
@@ -176,22 +177,23 @@ const getActionLinkClasses = (secondary = false) =>
                 </div>
                 <div class="overflow-hidden rounded-[0.75rem] border border-white/10 bg-[#0a0d12]">
                   <Image
-                    src={featuredProject.image}
-                    alt={`Preview of ${featuredProject.title}`}
-                    width={featuredProject.image.width}
-                    height={featuredProject.image.height}
-                    loading="eager"
-                    fetchpriority="high"
-                    class="h-auto w-full object-contain"
+                  src={featuredProject.image}
+                  alt={`Preview of ${featuredProject.title}`}
+                  width={featuredProject.image.width}
+                  height={featuredProject.image.height}
+                  sizes="(max-width: 767px) calc(100vw - 3.5rem), (max-width: 1279px) 58vw, 690px"
+                  loading="eager"
+                  fetchpriority="high"
+                  class="h-auto w-full object-contain"
                   />
                 </div>
               </div>
 
-              <div class="mt-3 grid gap-3 sm:grid-cols-2">
+              <div class="mt-3 grid gap-3 md:grid-cols-2">
                 {featuredProject.proofPoints.map((item, index) => (
                   <div
                     class={`motion-item radius-card border border-white/10 bg-white/[0.02] px-4 py-4 text-sm leading-6 text-soft ${
-                      index === featuredProject.proofPoints.length - 1 ? "sm:col-span-2" : ""
+                      index === featuredProject.proofPoints.length - 1 ? "md:col-span-2" : ""
                     }`}
                     data-reveal
                     style={`--reveal-delay: ${120 + index * 55}ms;`}
@@ -213,8 +215,8 @@ const getActionLinkClasses = (secondary = false) =>
               </h2>
               <p class="mt-3 max-w-xl text-base leading-7 text-soft sm:text-lg">{featuredProject.summary}</p>
 
-              <div class="mt-6 grid gap-3 sm:grid-cols-2">
-                <div class="radius-card border border-white/10 bg-white/[0.025] p-4 sm:col-span-2">
+              <div class="mt-6 grid gap-3 md:grid-cols-2">
+                <div class="radius-card border border-white/10 bg-white/[0.025] p-4 md:col-span-2">
                   <p class="eyebrow mb-3">Role</p>
                   <p class="text-sm leading-7 text-soft sm:text-[0.98rem]">{featuredProject.role}</p>
                 </div>
@@ -296,6 +298,7 @@ const getActionLinkClasses = (secondary = false) =>
                   alt={`Preview of ${project.title}`}
                   width={project.image.width}
                   height={project.image.height}
+                  sizes="(max-width: 1023px) calc(100vw - 2rem), 560px"
                   loading="lazy"
                   decoding="async"
                   class="h-auto w-full object-contain transition-transform duration-300 ease-out group-hover:scale-[1.02]"
@@ -353,8 +356,8 @@ const getActionLinkClasses = (secondary = false) =>
             <p class="mt-4 text-base leading-7 text-soft sm:text-lg">{contactContent.description}</p>
           </div>
 
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:mt-0 lg:justify-end">
-            <a href="mailto:avasdev98@gmail.com" target="_blank" rel="noopener noreferrer" class={`${getActionLinkClasses()} w-full justify-center sm:w-auto`}>
+          <div class="mt-8 flex flex-col gap-3 md:flex-row md:flex-wrap lg:mt-0 lg:justify-end">
+            <a href="mailto:avasdev98@gmail.com" target="_blank" rel="noopener noreferrer" class={`${getActionLinkClasses()} w-full justify-center md:w-auto`}>
               <span>Start A Conversation</span>
               <svg class="h-4 w-4" aria-hidden="true"><use href="#icon-mail"></use></svg>
             </a>
@@ -362,7 +365,7 @@ const getActionLinkClasses = (secondary = false) =>
               href="https://github.com/andrew-vasquez"
               target="_blank"
               rel="noopener noreferrer"
-              class={`${getActionLinkClasses(true)} w-full justify-center sm:w-auto`}
+              class={`${getActionLinkClasses(true)} w-full justify-center md:w-auto`}
             >
               <span>View GitHub</span>
               <svg class="h-4 w-4" aria-hidden="true"><use href="#icon-arrow-up-right"></use></svg>
@@ -372,8 +375,8 @@ const getActionLinkClasses = (secondary = false) =>
       </section>
     </main>
 
-    <footer class="mx-auto w-full max-w-[1200px] px-4 pb-8 sm:px-6 lg:px-8">
-      <div class="flex flex-col gap-3 border-t border-white/10 py-6 text-sm text-white/55 sm:flex-row sm:items-center sm:justify-between">
+    <footer class="safe-bottom mx-auto w-full max-w-[1200px] px-4 pb-8 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-3 border-t border-white/10 py-6 text-sm text-white/55 md:flex-row md:items-center md:justify-between">
         <p>&copy; 2026 Andrew Vasquez</p>
         
       </div>
