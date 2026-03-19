@@ -175,6 +175,8 @@ export function mountPixelSnow(container, options = {}) {
     variant = "square",
     direction = 125,
     maxFlakeSize = 0.0135,
+    timeOffset = 12,
+    startupFadeMs = 480,
   } = options;
 
   if (!container) return () => {};
@@ -199,6 +201,7 @@ export function mountPixelSnow(container, options = {}) {
   renderer.setPixelRatio(1);
   renderer.setSize(container.offsetWidth, container.offsetHeight);
   renderer.setClearColor(0x000000, 0);
+  renderer.domElement.style.opacity = "0";
   container.appendChild(renderer.domElement);
 
   const variantValue = variant === "round" ? 1 : variant === "snowflake" ? 2 : 0;
@@ -240,7 +243,7 @@ export function mountPixelSnow(container, options = {}) {
     }, 100);
   };
 
-  const startTime = performance.now();
+  const startTime = performance.now() - timeOffset * 1000;
   const frameIntervalMs = 1000 / Math.max(1, maxFps);
   let lastFrameTime = 0;
 
@@ -251,7 +254,9 @@ export function mountPixelSnow(container, options = {}) {
     }
 
     if (lastFrameTime === 0 || now - lastFrameTime >= frameIntervalMs) {
-      material.uniforms.uTime.value = (now - startTime) * 0.001;
+      const elapsed = now - startTime;
+      material.uniforms.uTime.value = elapsed * 0.001;
+      renderer.domElement.style.opacity = `${Math.min(1, elapsed / startupFadeMs)}`;
       renderer.render(scene, camera);
       lastFrameTime = now;
     }

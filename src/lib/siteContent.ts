@@ -25,10 +25,11 @@ export const stackGroups = [
       { name: "HTML", image: "/icons/html.svg" },
       { name: "CSS", image: "/icons/css.svg" },
       { name: "Next.js", image: "/icons/nextjs.svg" },
+      { name: "JavaScript", image: "/icons/javascript.svg" },
       { name: "React", image: "/icons/react.svg" },
       { name: "TypeScript", image: "/icons/typescript.svg" },
+      { name: "Astro", image: "/icons/astro.svg" },
       { name: "Tailwind", image: "/icons/tailwind.svg" },
-      { name: "JavaScript", image: "/icons/javascript.svg" },
     ],
   },
   {
