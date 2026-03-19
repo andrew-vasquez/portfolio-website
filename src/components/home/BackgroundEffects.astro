@@ -1,0 +1,42 @@
+---
+---
+
+<div class="pointer-events-none fixed inset-0 z-[1] overflow-hidden" aria-hidden="true">
+  <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0),rgba(7,8,10,0.16)_26%,rgba(7,8,10,0.8)_100%)]"></div>
+  <div class="absolute inset-0 opacity-[0.3]">
+    <div class="pixel-snow-container h-full w-full" data-pixel-snow></div>
+  </div>
+</div>
+
+<script>
+  import "@/components/PixelSnow.css";
+  import { mountPixelSnow } from "@/scripts/pixelSnow.js";
+
+  let cleanup = () => {};
+
+  const init = () => {
+    cleanup();
+
+    const element = document.querySelector("[data-pixel-snow]");
+    if (!element) return;
+
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    cleanup = mountPixelSnow(element, {
+      color: "#dce4ee",
+      variant: "square",
+      pixelResolution: isMobile ? 220 : 460,
+      maxFps: 60,
+      speed: 1.2,
+      density: 0.28,
+      flakeSize: 0.01,
+      brightness: 0.82,
+      depthFade: 8,
+      farPlane: 20,
+      direction: 125,
+      maxFlakeSize: isMobile ? 0.0125 : 0.0135,
+    }) ?? (() => {});
+  };
+
+  init();
+  window.addEventListener("astro:after-swap", init);
+</script>
