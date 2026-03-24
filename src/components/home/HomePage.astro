@@ -8,6 +8,11 @@ import signatureWhite from "@/assets/signature/signature-white.png";
 const [featuredProject, ...selectedProjects] = projectData;
 const buttonBaseClasses =
   "radius-control inline-flex min-h-11 items-center justify-center gap-2 px-5 py-3 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50";
+const macOsWindowControls = [
+  "bg-white/28 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_0_0_1px_rgba(255,255,255,0.03)]",
+  "bg-white/22 shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_0_0_1px_rgba(255,255,255,0.025)]",
+  "bg-white/16 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_0_0_1px_rgba(255,255,255,0.02)]",
+];
 
 const getActionLinkClasses = (secondary = false) =>
   secondary
@@ -163,17 +168,17 @@ const getActionLinkClasses = (secondary = false) =>
         </div>
 
         <section id="featured-work" class="mt-10 lg:mt-12">
-          <div class="grid items-start gap-5 lg:grid-cols-[1.18fr_0.92fr]">
+          <div class="grid gap-5 lg:grid-cols-[1.18fr_0.92fr] lg:items-stretch">
             <div
-              class="motion-item surface-panel radius-panel self-start overflow-hidden p-3"
+              class="motion-item surface-panel radius-panel flex h-full flex-col overflow-hidden p-3"
               data-reveal
               style="--reveal-delay: 0ms;"
             >
               <div class="radius-card border border-white/10 bg-[#0d1015] p-3 shadow-[0_30px_120px_-50px_rgba(0,0,0,0.95)]">
-                <div class="mb-3 flex items-center gap-2 px-1">
-                  <span class="h-2.5 w-2.5 rounded-full bg-white/30"></span>
-                  <span class="h-2.5 w-2.5 rounded-full bg-white/18"></span>
-                  <span class="h-2.5 w-2.5 rounded-full bg-white/12"></span>
+                <div class="mb-3 flex items-center gap-2 px-1" aria-hidden="true">
+                  {macOsWindowControls.map((controlClass) => (
+                    <span class={`h-2.5 w-2.5 rounded-full ${controlClass}`}></span>
+                  ))}
                 </div>
                 <div class="overflow-hidden rounded-[0.75rem] border border-white/10 bg-[#0a0d12]">
                   <Image
@@ -189,10 +194,14 @@ const getActionLinkClasses = (secondary = false) =>
                 </div>
               </div>
 
-              <div class="mt-3 grid gap-3 md:grid-cols-2">
+              <div class="mt-4 flex flex-1 flex-col">
+                <div class="mb-3 px-1">
+                  <p class="eyebrow">Highlights</p>
+                </div>
+                <div class="grid flex-1 auto-rows-fr gap-3 md:grid-cols-2">
                 {featuredProject.proofPoints.map((item, index) => (
                   <div
-                    class={`motion-item radius-card border border-white/10 bg-white/[0.02] px-4 py-4 text-sm leading-6 text-soft ${
+                    class={`motion-item radius-card flex h-full items-center border border-white/10 bg-white/[0.02] px-5 py-5 text-sm leading-7 text-soft ${
                       index === featuredProject.proofPoints.length - 1 ? "md:col-span-2" : ""
                     }`}
                     data-reveal
@@ -201,11 +210,12 @@ const getActionLinkClasses = (secondary = false) =>
                     {item}
                   </div>
                 ))}
+                </div>
               </div>
             </div>
 
             <div
-              class="motion-item surface-panel radius-panel p-6 sm:p-7"
+              class="motion-item surface-panel radius-panel h-full p-6 sm:p-7"
               data-reveal
               style="--reveal-delay: 80ms;"
             >
@@ -292,17 +302,26 @@ const getActionLinkClasses = (secondary = false) =>
               data-reveal
               style={`--reveal-delay: ${70 + index * 80}ms;`}
             >
-              <div class="overflow-hidden border-b border-white/10 bg-[#0a0d12]">
-                <Image
-                  src={project.image}
-                  alt={`Preview of ${project.title}`}
-                  width={project.image.width}
-                  height={project.image.height}
-                  sizes="(max-width: 1023px) calc(100vw - 2rem), 560px"
-                  loading="lazy"
-                  decoding="async"
-                  class="h-auto w-full object-contain transition-transform duration-300 ease-out group-hover:scale-[1.02]"
-                />
+              <div class="border-b border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(10,13,18,0.92))] p-3">
+                <div class="radius-card border border-white/10 bg-[#0d1015] p-3 shadow-[0_30px_120px_-50px_rgba(0,0,0,0.95)]">
+                  <div class="mb-3 flex items-center gap-2 px-1" aria-hidden="true">
+                    {macOsWindowControls.map((controlClass) => (
+                      <span class={`h-2.5 w-2.5 rounded-full ${controlClass}`}></span>
+                    ))}
+                  </div>
+                  <div class="overflow-hidden rounded-[0.75rem] border border-white/10 bg-[#0a0d12]">
+                    <Image
+                      src={project.image}
+                      alt={`Preview of ${project.title}`}
+                      width={project.image.width}
+                      height={project.image.height}
+                      sizes="(max-width: 1023px) calc(100vw - 2rem), 560px"
+                      loading="lazy"
+                      decoding="async"
+                      class="h-auto w-full object-contain transition-transform duration-300 ease-out group-hover:scale-[1.02]"
+                    />
+                  </div>
+                </div>
               </div>
               <div class="p-6 sm:p-7">
                 <div class="mb-4 flex items-start justify-between gap-4">
