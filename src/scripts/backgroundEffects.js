@@ -5,7 +5,7 @@ let loadTimer = null;
 function getSnowProfile() {
   const isMobile = window.matchMedia("(max-width: 767px)").matches;
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const hardwareConcurrency = navigator.hardwareConcurrency ?? 4;
+  const hardwareConcurrency = navigator.hardwareConcurrency == null ? 4 : navigator.hardwareConcurrency;
   const reportedDeviceMemory = Reflect.get(navigator, "deviceMemory");
   const deviceMemory = typeof reportedDeviceMemory === "number" ? reportedDeviceMemory : 4;
   const lowPower = hardwareConcurrency <= 4 || deviceMemory <= 4;
@@ -89,7 +89,7 @@ async function startSnow() {
   const { mountPixelSnow } = await import("@/scripts/pixelSnow.js");
   const profile = getSnowProfile();
 
-  cleanup = mountPixelSnow(element, {
+  const nextCleanup = mountPixelSnow(element, {
     color: "#dce4ee",
     variant: "square",
     pixelResolution: profile.pixelResolution,
@@ -104,7 +104,9 @@ async function startSnow() {
     maxFlakeSize: profile.maxFlakeSize,
     timeOffset: 12,
     startupFadeMs: 480,
-  }) ?? (() => {});
+  });
+
+  cleanup = typeof nextCleanup === "function" ? nextCleanup : () => {};
 }
 
 function init() {
