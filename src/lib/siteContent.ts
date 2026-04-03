@@ -1,8 +1,8 @@
 export const heroContent = {
-  pill: "Andrew Vasquez | Full-Stack Developer",
-  lines: ["I build clean, fast", "web products."],
+  pill: "Andrew Vasquez | Software Engineer",
+  lines: ["I build clean, fast", "scalable applications."],
   description:
-    "Full-stack developer building with React, Next.js, TypeScript, and modern web tooling.",
+    "Software engineer building with React, Next.js, TypeScript, and modern web tooling.",
   primaryCta: {
     label: "View Featured Work",
     href: "#featured-work",
@@ -12,7 +12,7 @@ export const heroContent = {
     href: "mailto:avasdev98@gmail.com",
   },
   meta: [
-    "WGU Software Developer student",
+    "Product-focused software engineer",
     "React, Next.js, TypeScript",
     "Open to frontend, full-stack, or backend roles",
   ],
