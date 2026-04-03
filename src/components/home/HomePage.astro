@@ -404,8 +404,6 @@ const getActionLinkClasses = (secondary = false) =>
 </div>
 
 <script>
-  import "@/components/PixelSnow.css";
-
   (() => {
     const revealSelector = "[data-reveal]";
 
@@ -452,21 +450,10 @@ const getActionLinkClasses = (secondary = false) =>
       }
     }
 
-    async function initBackgroundEffectsSafely() {
-      try {
-        const { initBackgroundEffects } = await import("@/scripts/backgroundEffects.js");
-        initBackgroundEffects();
-      } catch {
-        // Keep the rest of the page usable even if the background effect fails.
-      }
-    }
-
     initRevealMotion();
-    void initBackgroundEffectsSafely();
 
     window.addEventListener("astro:after-swap", () => {
       initRevealMotion();
-      void initBackgroundEffectsSafely();
     });
   })();
 </script>
