@@ -4,6 +4,7 @@ import BackgroundEffects from "@/components/home/BackgroundEffects.astro";
 import { projectData } from "@/lib/projectData";
 import { contactContent, heroContent, stackGroups } from "@/lib/siteContent";
 import signatureWhite from "@/assets/signature/signature-white.png";
+import homeInitScript from "@/scripts/homeInit.js?url";
 
 const [featuredProject, ...selectedProjects] = projectData;
 const buttonBaseClasses =
@@ -403,11 +404,4 @@ const getActionLinkClasses = (secondary = false) =>
   </div>
 </div>
 
-<script>
-  import "@/components/PixelSnow.css";
-  import { initBackgroundEffects } from "@/scripts/backgroundEffects.js";
-  import { initRevealMotion } from "@/scripts/revealMotion.js";
-
-  initBackgroundEffects();
-  initRevealMotion();
-</script>
+<script is:inline type="module" src={homeInitScript}></script>
