@@ -1,22 +1,16 @@
-function noop() {}
-
-let cleanup = noop;
+let cleanup = function () {};
 let idleHandle = null;
 let loadTimer = null;
+let initialized = false;
 
 function getSnowProfile() {
   const isMobile = window.matchMedia("(max-width: 767px)").matches;
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
-  const hardwareConcurrency =
-    navigator.hardwareConcurrency == null ? 4 : navigator.hardwareConcurrency;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const hardwareConcurrency = navigator.hardwareConcurrency == null ? 4 : navigator.hardwareConcurrency;
   const reportedDeviceMemory = Reflect.get(navigator, "deviceMemory");
-  const deviceMemory =
-    typeof reportedDeviceMemory === "number" ? reportedDeviceMemory : 4;
+  const deviceMemory = typeof reportedDeviceMemory === "number" ? reportedDeviceMemory : 4;
   const lowPower = hardwareConcurrency <= 4 || deviceMemory <= 4;
-  const highPowerDesktop =
-    !isMobile && hardwareConcurrency >= 8 && deviceMemory >= 8;
+  const highPowerDesktop = !isMobile && hardwareConcurrency >= 8 && deviceMemory >= 8;
 
   if (prefersReducedMotion) {
     return {
@@ -29,21 +23,23 @@ function getSnowProfile() {
   }
 
   if (isMobile) {
-    return lowPower
-      ? {
-          pixelResolution: 180,
-          density: 0.18,
-          farPlane: 15,
-          brightness: 0.76,
-          maxFlakeSize: 0.0112,
-        }
-      : {
-          pixelResolution: 205,
-          density: 0.22,
-          farPlane: 17,
-          brightness: 0.8,
-          maxFlakeSize: 0.0118,
-        };
+    if (lowPower) {
+      return {
+        pixelResolution: 180,
+        density: 0.18,
+        farPlane: 15,
+        brightness: 0.76,
+        maxFlakeSize: 0.0112,
+      };
+    }
+
+    return {
+      pixelResolution: 205,
+      density: 0.22,
+      farPlane: 17,
+      brightness: 0.8,
+      maxFlakeSize: 0.0118,
+    };
   }
 
   if (lowPower) {
@@ -79,9 +75,11 @@ function clearPendingInit() {
   if (idleHandle !== null && typeof window.cancelIdleCallback === "function") {
     window.cancelIdleCallback(idleHandle);
   }
+
   if (loadTimer !== null) {
     window.clearTimeout(loadTimer);
   }
+
   idleHandle = null;
   loadTimer = null;
 }
@@ -93,36 +91,34 @@ function startSnow() {
   const element = document.querySelector("[data-pixel-snow]");
   if (!element) return;
 
-  import("./pixelSnow.js").then(function (mod) {
-    const profile = getSnowProfile();
-    const nextCleanup = mod.mountPixelSnow(element, {
-      color: "#dce4ee",
-      variant: "square",
-      pixelResolution: profile.pixelResolution,
-      maxFps: 60,
-      speed: 1.2,
-      density: profile.density,
-      flakeSize: 0.01,
-      brightness: profile.brightness,
-      depthFade: 8,
-      farPlane: profile.farPlane,
-      direction: 125,
-      maxFlakeSize: profile.maxFlakeSize,
-      timeOffset: 12,
-      startupFadeMs: 480,
-    });
+  import("/pixel-snow-renderer.js")
+    .then(function (mod) {
+      const profile = getSnowProfile();
+      const nextCleanup = mod.mountPixelSnow(element, {
+        color: "#dce4ee",
+        variant: "square",
+        pixelResolution: profile.pixelResolution,
+        maxFps: 60,
+        speed: 1.2,
+        density: profile.density,
+        flakeSize: 0.01,
+        brightness: profile.brightness,
+        depthFade: 8,
+        farPlane: profile.farPlane,
+        direction: 125,
+        maxFlakeSize: profile.maxFlakeSize,
+        timeOffset: 12,
+        startupFadeMs: 480,
+      });
 
-    if (typeof nextCleanup === "function") {
-      cleanup = nextCleanup;
-    } else {
-      cleanup = noop;
-    }
-  }).catch(function () {
-    cleanup = noop;
-  });
+      cleanup = typeof nextCleanup === "function" ? nextCleanup : function () {};
+    })
+    .catch(function () {
+      cleanup = function () {};
+    });
 }
 
-function init() {
+function initPixelSnow() {
   cleanup();
   clearPendingInit();
 
@@ -150,13 +146,9 @@ function init() {
   window.addEventListener("load", onLoad, { once: true });
 }
 
-let initialized = false;
+initPixelSnow();
 
-export function initBackgroundEffects() {
-  init();
-
-  if (initialized) return;
-
-  window.addEventListener("astro:after-swap", init);
+if (!initialized) {
+  window.addEventListener("astro:after-swap", initPixelSnow);
   initialized = true;
 }
