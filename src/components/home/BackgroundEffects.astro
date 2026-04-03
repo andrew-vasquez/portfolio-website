@@ -12,24 +12,21 @@
   import "@/components/PixelSnow.css";
 
   let cleanup = () => {};
-  let idleHandle = /** @type {number | null} */ (null);
-  let loadTimer = /** @type {number | null} */ (null);
-  const win = window;
-  const requestIdleCallback =
-    "requestIdleCallback" in win && typeof win["requestIdleCallback"] === "function"
-      ? win["requestIdleCallback"].bind(win)
-      : null;
-  const cancelIdleCallback =
-    "cancelIdleCallback" in win && typeof win["cancelIdleCallback"] === "function"
-      ? win["cancelIdleCallback"].bind(win)
-      : null;
+  let idleHandle: number | null = null;
+  let loadTimer: number | null = null;
+  const win = window as Window & {
+    requestIdleCallback?: (
+      callback: IdleRequestCallback,
+      options?: IdleRequestOptions,
+    ) => number;
+    cancelIdleCallback?: (handle: number) => void;
+  };
 
   const getSnowProfile = () => {
     const isMobile = window.matchMedia("(max-width: 767px)").matches;
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const hardwareConcurrency = navigator.hardwareConcurrency ?? 4;
-    const reportedDeviceMemory = Reflect.get(navigator, "deviceMemory");
-    const deviceMemory = typeof reportedDeviceMemory === "number" ? reportedDeviceMemory : 4;
+    const deviceMemory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 4;
     const lowPower = hardwareConcurrency <= 4 || deviceMemory <= 4;
     const highPowerDesktop = !isMobile && hardwareConcurrency >= 8 && deviceMemory >= 8;
 
@@ -91,8 +88,8 @@
   };
 
   const clearPendingInit = () => {
-    if (idleHandle !== null && cancelIdleCallback) {
-      cancelIdleCallback(idleHandle);
+    if (idleHandle !== null && typeof win.cancelIdleCallback === "function") {
+      win.cancelIdleCallback(idleHandle);
     }
     if (loadTimer !== null) {
       window.clearTimeout(loadTimer);
@@ -139,8 +136,8 @@
       }, 120);
     };
 
-    if (requestIdleCallback) {
-      idleHandle = requestIdleCallback(kickoff, { timeout: 1200 });
+    if (typeof win.requestIdleCallback === "function") {
+      idleHandle = win.requestIdleCallback(kickoff, { timeout: 1200 });
       return;
     }
 
