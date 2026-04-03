@@ -1,4 +1,6 @@
-let cleanup = () => {};
+function noop() {}
+
+let cleanup = noop;
 let idleHandle = null;
 let loadTimer = null;
 
@@ -84,45 +86,51 @@ function clearPendingInit() {
   loadTimer = null;
 }
 
-async function startSnow() {
+function startSnow() {
   cleanup();
   clearPendingInit();
 
   const element = document.querySelector("[data-pixel-snow]");
   if (!element) return;
 
-  const { mountPixelSnow } = await import("@/scripts/pixelSnow.js");
-  const profile = getSnowProfile();
+  import("./pixelSnow.js").then(function (mod) {
+    const profile = getSnowProfile();
+    const nextCleanup = mod.mountPixelSnow(element, {
+      color: "#dce4ee",
+      variant: "square",
+      pixelResolution: profile.pixelResolution,
+      maxFps: 60,
+      speed: 1.2,
+      density: profile.density,
+      flakeSize: 0.01,
+      brightness: profile.brightness,
+      depthFade: 8,
+      farPlane: profile.farPlane,
+      direction: 125,
+      maxFlakeSize: profile.maxFlakeSize,
+      timeOffset: 12,
+      startupFadeMs: 480,
+    });
 
-  const nextCleanup = mountPixelSnow(element, {
-    color: "#dce4ee",
-    variant: "square",
-    pixelResolution: profile.pixelResolution,
-    maxFps: 60,
-    speed: 1.2,
-    density: profile.density,
-    flakeSize: 0.01,
-    brightness: profile.brightness,
-    depthFade: 8,
-    farPlane: profile.farPlane,
-    direction: 125,
-    maxFlakeSize: profile.maxFlakeSize,
-    timeOffset: 12,
-    startupFadeMs: 480,
+    if (typeof nextCleanup === "function") {
+      cleanup = nextCleanup;
+    } else {
+      cleanup = noop;
+    }
+  }).catch(function () {
+    cleanup = noop;
   });
-
-  cleanup = typeof nextCleanup === "function" ? nextCleanup : () => {};
 }
 
 function init() {
   cleanup();
   clearPendingInit();
 
-  const kickoff = () => {
-    loadTimer = window.setTimeout(() => {
-      void startSnow();
+  function kickoff() {
+    loadTimer = window.setTimeout(function () {
+      startSnow();
     }, 120);
-  };
+  }
 
   if (typeof window.requestIdleCallback === "function") {
     idleHandle = window.requestIdleCallback(kickoff, { timeout: 1200 });
@@ -134,10 +142,10 @@ function init() {
     return;
   }
 
-  const onLoad = () => {
+  function onLoad() {
     window.removeEventListener("load", onLoad);
     kickoff();
-  };
+  }
 
   window.addEventListener("load", onLoad, { once: true });
 }
