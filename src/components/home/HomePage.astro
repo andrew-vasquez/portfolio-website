@@ -404,18 +404,10 @@ const getActionLinkClasses = (secondary = false) =>
 </div>
 
 <script>
-  // @ts-nocheck
+  import "@/components/PixelSnow.css";
+
   (() => {
     const revealSelector = "[data-reveal]";
-
-    function markVisible(node) {
-      node.classList.add("is-visible");
-      if (node instanceof HTMLElement) {
-        window.setTimeout(() => {
-          node.style.willChange = "auto";
-        }, 720);
-      }
-    }
 
     function initRevealMotion() {
       const nodes = Array.from(document.querySelectorAll(revealSelector));
@@ -439,7 +431,13 @@ const getActionLinkClasses = (secondary = false) =>
           entries.forEach((entry) => {
             if (!entry.isIntersecting) return;
 
-            markVisible(entry.target);
+            entry.target.classList.add("is-visible");
+            if (entry.target instanceof HTMLElement) {
+              const target = entry.target;
+              window.setTimeout(() => {
+                target.style.willChange = "auto";
+              }, 720);
+            }
             observer.unobserve(entry.target);
           });
         },
@@ -454,7 +452,21 @@ const getActionLinkClasses = (secondary = false) =>
       }
     }
 
+    async function initBackgroundEffectsSafely() {
+      try {
+        const { initBackgroundEffects } = await import("@/scripts/backgroundEffects.js");
+        initBackgroundEffects();
+      } catch {
+        // Keep the rest of the page usable even if the background effect fails.
+      }
+    }
+
     initRevealMotion();
-    window.addEventListener("astro:after-swap", initRevealMotion);
+    void initBackgroundEffectsSafely();
+
+    window.addEventListener("astro:after-swap", () => {
+      initRevealMotion();
+      void initBackgroundEffectsSafely();
+    });
   })();
 </script>
