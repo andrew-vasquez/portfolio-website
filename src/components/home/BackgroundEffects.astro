@@ -12,8 +12,8 @@
   import "@/components/PixelSnow.css";
 
   let cleanup = () => {};
-  let idleHandle = null;
-  let loadTimer = null;
+  let idleHandle = /** @type {number | null} */ (null);
+  let loadTimer = /** @type {number | null} */ (null);
   const win = window;
   const requestIdleCallback =
     "requestIdleCallback" in win && typeof win["requestIdleCallback"] === "function"
@@ -28,7 +28,8 @@
     const isMobile = window.matchMedia("(max-width: 767px)").matches;
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const hardwareConcurrency = navigator.hardwareConcurrency ?? 4;
-    const deviceMemory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 4;
+    const reportedDeviceMemory = Reflect.get(navigator, "deviceMemory");
+    const deviceMemory = typeof reportedDeviceMemory === "number" ? reportedDeviceMemory : 4;
     const lowPower = hardwareConcurrency <= 4 || deviceMemory <= 4;
     const highPowerDesktop = !isMobile && hardwareConcurrency >= 8 && deviceMemory >= 8;
 
