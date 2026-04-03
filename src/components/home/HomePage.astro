@@ -4,6 +4,7 @@ import BackgroundEffects from "@/components/home/BackgroundEffects.astro";
 import { projectData } from "@/lib/projectData";
 import { contactContent, heroContent, stackGroups } from "@/lib/siteContent";
 import signatureWhite from "@/assets/signature/signature-white.png";
+import homeInitScript from "@/scripts/homeInit.js?url";
 
 const [featuredProject, ...selectedProjects] = projectData;
 const buttonBaseClasses =
@@ -58,7 +59,7 @@ const getActionLinkClasses = (secondary = false) =>
           </div>
           <div>
             <p class="eyebrow mb-1">Andrew Vasquez</p>
-            <p class="text-sm text-soft sm:text-[0.95rem]">Full-Stack Developer</p>
+            <p class="text-sm text-soft sm:text-[0.95rem]">Software Engineer</p>
           </div>
         </div>
         <div class="flex w-full shrink-0 items-center justify-end gap-2 md:w-auto">
@@ -309,7 +310,7 @@ const getActionLinkClasses = (secondary = false) =>
                       <span class={`h-2.5 w-2.5 rounded-full ${controlClass}`}></span>
                     ))}
                   </div>
-                  <div class="overflow-hidden rounded-[0.75rem] border border-white/10 bg-[#0a0d12]">
+                  <div class="aspect-[3456/1600] overflow-hidden rounded-[0.75rem] border border-white/10 bg-[#0a0d12]">
                     <Image
                       src={project.image}
                       alt={`Preview of ${project.title}`}
@@ -318,7 +319,7 @@ const getActionLinkClasses = (secondary = false) =>
                       sizes="(max-width: 1023px) calc(100vw - 2rem), 560px"
                       loading="lazy"
                       decoding="async"
-                      class="h-auto w-full object-contain transition-transform duration-300 ease-out group-hover:scale-[1.02]"
+                      class="h-full w-full object-cover object-top transition-transform duration-300 ease-out group-hover:scale-[1.02]"
                     />
                   </div>
                 </div>
@@ -403,8 +404,4 @@ const getActionLinkClasses = (secondary = false) =>
   </div>
 </div>
 
-<script>
-  import { initRevealMotion } from "@/scripts/revealMotion.js";
-
-  initRevealMotion();
-</script>
+<script is:inline type="module" src={homeInitScript}></script>
