@@ -4,12 +4,17 @@ let loadTimer = null;
 
 function getSnowProfile() {
   const isMobile = window.matchMedia("(max-width: 767px)").matches;
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const hardwareConcurrency = navigator.hardwareConcurrency == null ? 4 : navigator.hardwareConcurrency;
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  const hardwareConcurrency =
+    navigator.hardwareConcurrency == null ? 4 : navigator.hardwareConcurrency;
   const reportedDeviceMemory = Reflect.get(navigator, "deviceMemory");
-  const deviceMemory = typeof reportedDeviceMemory === "number" ? reportedDeviceMemory : 4;
+  const deviceMemory =
+    typeof reportedDeviceMemory === "number" ? reportedDeviceMemory : 4;
   const lowPower = hardwareConcurrency <= 4 || deviceMemory <= 4;
-  const highPowerDesktop = !isMobile && hardwareConcurrency >= 8 && deviceMemory >= 8;
+  const highPowerDesktop =
+    !isMobile && hardwareConcurrency >= 8 && deviceMemory >= 8;
 
   if (prefersReducedMotion) {
     return {
