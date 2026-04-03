@@ -404,5 +404,57 @@ const getActionLinkClasses = (secondary = false) =>
 </div>
 
 <script>
-  import "@/scripts/homeInit.js";
+  // @ts-nocheck
+  (() => {
+    const revealSelector = "[data-reveal]";
+
+    function markVisible(node) {
+      node.classList.add("is-visible");
+      if (node instanceof HTMLElement) {
+        window.setTimeout(() => {
+          node.style.willChange = "auto";
+        }, 720);
+      }
+    }
+
+    function initRevealMotion() {
+      const nodes = Array.from(document.querySelectorAll(revealSelector));
+
+      if (!nodes.length) return;
+
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (prefersReducedMotion || typeof window.IntersectionObserver !== "function") {
+        for (const node of nodes) {
+          node.classList.add("is-visible");
+          if (node instanceof HTMLElement) {
+            node.style.willChange = "auto";
+          }
+        }
+        return;
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            markVisible(entry.target);
+            observer.unobserve(entry.target);
+          });
+        },
+        {
+          rootMargin: "0px 0px -10% 0px",
+          threshold: 0.14,
+        },
+      );
+
+      for (const node of nodes) {
+        observer.observe(node);
+      }
+    }
+
+    initRevealMotion();
+    window.addEventListener("astro:after-swap", initRevealMotion);
+  })();
 </script>
