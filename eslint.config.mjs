@@ -29,6 +29,8 @@ const eslintConfig = [
         clearTimeout: "readonly",
         performance: "readonly",
         IntersectionObserver: "readonly",
+        ResizeObserver: "readonly",
+        globalThis: "readonly",
         URL: "readonly",
         process: "readonly",
       },

@@ -115,7 +115,7 @@ export const projectData: ProjectData[] = [
       "PostgreSQL",
     ],
     stack: [
-      "Next.js 16",
+      "TanStack Start",
       "React 19",
       "TypeScript",
       "Tailwind CSS v4",
