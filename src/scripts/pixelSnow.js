@@ -1,311 +1,251 @@
-import {
-  Scene,
-  OrthographicCamera,
-  WebGLRenderer,
-  PlaneGeometry,
-  ShaderMaterial,
-  Mesh,
-  Vector2,
-  Vector3,
-  Color,
-} from "three";
-
-const vertexShader = `
-void main() {
-  gl_Position = vec4(position, 1.0);
-}
-`;
-
-const fragmentShader = `
-precision mediump float;
-
-uniform float uTime;
-uniform vec2 uResolution;
-uniform float uFlakeSize;
-uniform float uMinFlakeSize;
-uniform float uPixelResolution;
-uniform float uSpeed;
-uniform float uDepthFade;
-uniform float uFarPlane;
-uniform vec3 uColor;
-uniform float uBrightness;
-uniform float uGamma;
-uniform float uDensity;
-uniform float uVariant;
-uniform float uDirection;
-uniform float uMaxFlakeSize;
-
-#define PI 3.14159265
-#define PI_OVER_6 0.5235988
-#define PI_OVER_3 1.0471976
-#define M1 1597334677U
-#define M2 3812015801U
-#define M3 3299493293U
-#define F0 2.3283064e-10
-#define hash(n) (n * (n ^ (n >> 15)))
-#define coord3(p) (uvec3(p).x * M1 ^ uvec3(p).y * M2 ^ uvec3(p).z * M3)
-
-const vec3 camK = vec3(0.57735027, 0.57735027, 0.57735027);
-const vec3 camI = vec3(0.70710678, 0.0, -0.70710678);
-const vec3 camJ = vec3(-0.40824829, 0.81649658, -0.40824829);
-const vec2 b1d = vec2(0.574, 0.819);
-
-vec3 hash3(uint n) {
-  uvec3 hashed = hash(n) * uvec3(1U, 511U, 262143U);
-  return vec3(hashed) * F0;
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
 }
 
-float snowflakeDist(vec2 p) {
-  float r = length(p);
-  float a = atan(p.y, p.x);
-  a = abs(mod(a + PI_OVER_6, PI_OVER_3) - PI_OVER_6);
-  vec2 q = r * vec2(cos(a), sin(a));
-  float dMain = max(abs(q.y), max(-q.x, q.x - 1.0));
-  float b1t = clamp(dot(q - vec2(0.4, 0.0), b1d), 0.0, 0.4);
-  float dB1 = length(q - vec2(0.4, 0.0) - b1t * b1d);
-  float b2t = clamp(dot(q - vec2(0.7, 0.0), b1d), 0.0, 0.25);
-  float dB2 = length(q - vec2(0.7, 0.0) - b2t * b1d);
-  return min(dMain, min(dB1, dB2)) * 10.0;
+function parseHexColor(color) {
+  const normalized = color.replace("#", "");
+  const value = normalized.length === 3
+    ? normalized.split("").map((part) => part + part).join("")
+    : normalized.padEnd(6, "f").slice(0, 6);
+
+  return {
+    r: Number.parseInt(value.slice(0, 2), 16),
+    g: Number.parseInt(value.slice(2, 4), 16),
+    b: Number.parseInt(value.slice(4, 6), 16),
+  };
 }
 
-void main() {
-  float invPixelRes = 1.0 / uPixelResolution;
-  float pixelSize = max(1.0, floor(0.5 + uResolution.x * invPixelRes));
-  float invPixelSize = 1.0 / pixelSize;
-
-  vec2 fragCoord = floor(gl_FragCoord.xy * invPixelSize);
-  vec2 res = uResolution * invPixelSize;
-  float invResX = 1.0 / res.x;
-
-  vec3 ray = normalize(vec3((fragCoord - res * 0.5) * invResX, 1.0));
-  ray = ray.x * camI + ray.y * camJ + ray.z * camK;
-
-  float timeSpeed = uTime * uSpeed;
-  float windX = cos(uDirection) * 0.4;
-  float windY = sin(uDirection) * 0.4;
-  vec3 camPos = (windX * camI + windY * camJ + 0.1 * camK) * timeSpeed;
-  vec3 pos = camPos;
-
-  vec3 absRay = max(abs(ray), vec3(0.001));
-  vec3 strides = 1.0 / absRay;
-  vec3 raySign = step(ray, vec3(0.0));
-  vec3 phase = fract(pos) * strides;
-  phase = mix(strides - phase, phase, raySign);
-
-  float rayDotCamK = dot(ray, camK);
-  float invRayDotCamK = 1.0 / rayDotCamK;
-  float invDepthFade = 1.0 / uDepthFade;
-  float halfInvResX = 0.5 * invResX;
-  vec3 timeAnim = timeSpeed * 0.1 * vec3(7.0, 8.0, 5.0);
-
-  float t = 0.0;
-  for (int i = 0; i < 96; i++) {
-    if (t >= uFarPlane) break;
-
-    vec3 fpos = floor(pos);
-    uint cellCoord = coord3(fpos);
-    float cellHash = hash3(cellCoord).x;
-
-    if (cellHash < uDensity) {
-      vec3 h = hash3(cellCoord);
-      vec3 sinArg1 = fpos.yzx * 0.073;
-      vec3 sinArg2 = fpos.zxy * 0.27;
-      vec3 flakePos = 0.5 - 0.5 * cos(4.0 * sin(sinArg1) + 4.0 * sin(sinArg2) + 2.0 * h + timeAnim);
-      flakePos = flakePos * 0.8 + 0.1 + fpos;
-
-      float toIntersection = dot(flakePos - pos, camK) * invRayDotCamK;
-
-      if (toIntersection > 0.0) {
-        vec3 testPos = pos + ray * toIntersection - flakePos;
-        float testX = dot(testPos, camI);
-        float testY = dot(testPos, camJ);
-        vec2 testUV = abs(vec2(testX, testY));
-
-        float depth = dot(flakePos - camPos, camK);
-        float flakeSize = clamp(
-          max(uFlakeSize, uMinFlakeSize * depth * halfInvResX),
-          uFlakeSize,
-          uMaxFlakeSize
-        );
-
-        float dist;
-        if (uVariant < 0.5) {
-          dist = max(testUV.x, testUV.y);
-        } else if (uVariant < 1.5) {
-          dist = length(testUV);
-        } else {
-          float invFlakeSize = 1.0 / flakeSize;
-          dist = snowflakeDist(vec2(testX, testY) * invFlakeSize) * flakeSize;
-        }
-
-        if (dist < flakeSize) {
-          float flakeSizeRatio = uFlakeSize / flakeSize;
-          float intensity = exp2(-(t + toIntersection) * invDepthFade) *
-            min(1.0, flakeSizeRatio * flakeSizeRatio) * uBrightness;
-          gl_FragColor = vec4(uColor * pow(vec3(intensity), vec3(uGamma)), 1.0);
-          return;
-        }
-      }
-    }
-
-    float nextStep = min(min(phase.x, phase.y), phase.z);
-    vec3 sel = step(phase, vec3(nextStep));
-    phase = phase - nextStep + strides * sel;
-    t += nextStep;
-    pos = mix(pos + ray * nextStep, floor(pos + ray * nextStep + 0.5), sel);
-  }
-
-  gl_FragColor = vec4(0.0);
+function getDesktopScale(width) {
+  if (width >= 1280) return 0.42;
+  if (width >= 1024) return 0.5;
+  if (width >= 768) return 0.72;
+  return 1;
 }
-`;
+
+function getRenderSnap(width, pixelStep) {
+  if (width >= 1280) return 1;
+  if (width >= 1024) return Math.max(1, Math.round(pixelStep * 0.5));
+  if (width >= 768) return Math.max(1, Math.round(pixelStep * 0.75));
+  return pixelStep;
+}
+
+function createFlake(width, height, overscan, sizeBase, alphaBase, velocity, drift, spawnAboveTop) {
+  const depth = Math.random();
+  const size = clamp(
+    Math.round(sizeBase * (0.35 + depth * 0.85 + Math.random() * 0.25)),
+    1,
+    Math.max(1, Math.round(sizeBase * 1.4)),
+  );
+
+  return {
+    x: Math.random() * (width + overscan * 2) - overscan,
+    y: spawnAboveTop
+      ? -Math.random() * (height * 0.35 + overscan) - size
+      : Math.random() * (height + overscan * 2) - overscan,
+    depth,
+    size,
+    alpha: clamp(alphaBase * (0.6 + depth * 0.95), 0.06, 0.28),
+    vx: drift * (0.7 + depth * 1.1) + (Math.random() - 0.5) * sizeBase * 1.1,
+    vy: velocity * (0.85 + depth * 1.35) + Math.random() * sizeBase * 12,
+    swayAmount: sizeBase * (0.8 + depth * 1.8),
+    swayFrequency: 0.75 + depth * 1.35,
+    phase: Math.random() * Math.PI * 2,
+  };
+}
 
 export function mountPixelSnow(container, options = {}) {
   const {
     color = "#dce4ee",
-    flakeSize = 0.01,
-    minFlakeSize = 1.25,
     pixelResolution = 500,
-    maxFps = 60,
     speed = 1.2,
-    depthFade = 8,
-    farPlane = 20,
     brightness = 0.82,
-    gamma = 0.4545,
     density = 0.28,
     variant = "square",
     direction = 125,
-    maxFlakeSize = 0.0135,
-    timeOffset = 12,
-    startupFadeMs = 480,
   } = options;
 
   if (!container) return () => {};
 
-  let animationFrame = null;
-  let isVisible = true;
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d", { alpha: true });
+
+  if (!context) return () => {};
+
+  canvas.setAttribute("aria-hidden", "true");
+  canvas.style.display = "block";
+  canvas.style.width = "100%";
+  canvas.style.height = "100%";
+  canvas.style.pointerEvents = "none";
+  container.appendChild(canvas);
+
+  const rgb = parseHexColor(color);
+  const angle = (direction * Math.PI) / 180;
+  const verticalBias = Math.max(0.42, Math.sin(angle));
+  const horizontalBias = Math.cos(angle);
+
+  let flakes = [];
+  let width = 1;
+  let height = 1;
+  let pixelStep = 1;
+  let overscan = 12;
   let isPageVisible = true;
-  let resizeTimeout = null;
-
-  const scene = new Scene();
-  const camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
-  const renderer = new WebGLRenderer({
-    antialias: false,
-    alpha: true,
-    premultipliedAlpha: false,
-    powerPreference: "high-performance",
-    desynchronized: true,
-    stencil: false,
-    depth: false,
-  });
-
-  renderer.setPixelRatio(1);
-  renderer.setSize(container.offsetWidth, container.offsetHeight);
-  renderer.setClearColor(0x000000, 0);
-  renderer.domElement.style.opacity = "0";
-  container.appendChild(renderer.domElement);
-
-  const variantValue = variant === "round" ? 1 : variant === "snowflake" ? 2 : 0;
-  const threeColor = new Color(color);
-
-  const material = new ShaderMaterial({
-    vertexShader,
-    fragmentShader,
-    uniforms: {
-      uTime: { value: 0 },
-      uResolution: { value: new Vector2(container.offsetWidth, container.offsetHeight) },
-      uFlakeSize: { value: flakeSize },
-      uMinFlakeSize: { value: minFlakeSize },
-      uPixelResolution: { value: pixelResolution },
-      uSpeed: { value: speed },
-      uDepthFade: { value: depthFade },
-      uFarPlane: { value: farPlane },
-      uColor: { value: new Vector3(threeColor.r, threeColor.g, threeColor.b) },
-      uBrightness: { value: brightness },
-      uGamma: { value: gamma },
-      uDensity: { value: density },
-      uVariant: { value: variantValue },
-      uDirection: { value: (direction * Math.PI) / 180 },
-      uMaxFlakeSize: { value: maxFlakeSize },
-    },
-    transparent: true,
-  });
-
-  const geometry = new PlaneGeometry(2, 2);
-  scene.add(new Mesh(geometry, material));
-
-  const handleResize = () => {
-    if (resizeTimeout) clearTimeout(resizeTimeout);
-    resizeTimeout = window.setTimeout(() => {
-      const w = container.offsetWidth;
-      const h = container.offsetHeight;
-      renderer.setSize(w, h);
-      material.uniforms.uResolution.value.set(w, h);
-    }, 100);
-  };
-
-  const startTime = performance.now() - timeOffset * 1000;
-  const frameIntervalMs = 1000 / Math.max(1, maxFps);
+  let resizeRaf = 0;
+  let frameHandle = 0;
   let lastFrameTime = 0;
 
-  const animate = (now) => {
-    if (!isVisible || !isPageVisible) {
-      animationFrame = null;
+  function rebuildFlakes() {
+    const area = width * height;
+    const densityScale = clamp(density / 0.24, 0.58, 1.2);
+    const targetCount = clamp(
+      Math.round((area / Math.max(pixelResolution * 26, 7000)) * densityScale),
+      40,
+      170,
+    );
+    const sizeBase = Math.max(1, Math.round(pixelStep * getDesktopScale(width)));
+    const alphaBase = brightness * (width >= 1024 ? 0.9 : 1.2);
+    const velocity = speed * verticalBias * (44 + sizeBase * 10);
+    const drift = speed * horizontalBias * (14 + sizeBase * 3);
+
+    flakes = Array.from({ length: targetCount }, function () {
+      return createFlake(width, height, overscan, sizeBase, alphaBase, velocity, drift, false);
+    });
+  }
+
+  function applyCanvasSize() {
+    const nextWidth = Math.max(1, Math.round(container.clientWidth));
+    const nextHeight = Math.max(1, Math.round(container.clientHeight));
+
+    if (nextWidth === width && nextHeight === height) return;
+
+    width = nextWidth;
+    height = nextHeight;
+    pixelStep = Math.max(1, Math.round(width / pixelResolution));
+    overscan = pixelStep * 14;
+
+    canvas.width = width;
+    canvas.height = height;
+    rebuildFlakes();
+    lastFrameTime = 0;
+  }
+
+  function scheduleCanvasResize() {
+    if (resizeRaf !== 0) cancelAnimationFrame(resizeRaf);
+    resizeRaf = requestAnimationFrame(() => {
+      resizeRaf = 0;
+      applyCanvasSize();
+      drawFrame();
+    });
+  }
+
+  function respawnFlake(flake) {
+    const sizeBase = Math.max(1, Math.round(pixelStep * getDesktopScale(width)));
+    const alphaBase = brightness * (width >= 1024 ? 0.9 : 1.2);
+    const velocity = speed * verticalBias * (44 + sizeBase * 10);
+    const drift = speed * horizontalBias * (14 + sizeBase * 3);
+    const nextFlake = createFlake(width, height, overscan, sizeBase, alphaBase, velocity, drift, true);
+
+    flake.x = nextFlake.x;
+    flake.y = nextFlake.y;
+    flake.depth = nextFlake.depth;
+    flake.size = nextFlake.size;
+    flake.alpha = nextFlake.alpha;
+    flake.vx = nextFlake.vx;
+    flake.vy = nextFlake.vy;
+    flake.swayAmount = nextFlake.swayAmount;
+    flake.swayFrequency = nextFlake.swayFrequency;
+    flake.phase = nextFlake.phase;
+  }
+
+  function drawFlake(flake) {
+    const renderSnap = getRenderSnap(width, pixelStep);
+    const drawX = Math.round(flake.x / renderSnap) * renderSnap;
+    const drawY = Math.round(flake.y / renderSnap) * renderSnap;
+
+    context.fillStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${flake.alpha})`;
+
+    if (variant === "round" && flake.size > 1) {
+      context.beginPath();
+      context.arc(drawX + flake.size * 0.5, drawY + flake.size * 0.5, flake.size * 0.5, 0, Math.PI * 2);
+      context.fill();
       return;
     }
 
-    if (lastFrameTime === 0 || now - lastFrameTime >= frameIntervalMs) {
-      const elapsed = now - startTime;
-      material.uniforms.uTime.value = elapsed * 0.001;
-      renderer.domElement.style.opacity = `${Math.min(1, elapsed / startupFadeMs)}`;
-      renderer.render(scene, camera);
-      lastFrameTime = now;
+    context.fillRect(drawX, drawY, flake.size, flake.size);
+  }
+
+  function drawFrame() {
+    context.clearRect(0, 0, width, height);
+    for (const flake of flakes) {
+      drawFlake(flake);
+    }
+  }
+
+  function tick(frameTime) {
+    if (!isPageVisible) {
+      frameHandle = 0;
+      return;
     }
 
-    animationFrame = requestAnimationFrame(animate);
-  };
+    if (lastFrameTime === 0) lastFrameTime = frameTime;
+    const deltaSeconds = Math.min(0.05, (frameTime - lastFrameTime) * 0.001);
+    lastFrameTime = frameTime;
+    const timeSeconds = frameTime * 0.001;
 
-  const observer = new IntersectionObserver(([entry]) => {
-    isVisible = entry.isIntersecting;
-    if (entry.isIntersecting) {
-      if (!animationFrame) {
-        lastFrameTime = 0;
-        animationFrame = requestAnimationFrame(animate);
+    for (const flake of flakes) {
+      const swayVelocity = Math.sin(timeSeconds * flake.swayFrequency + flake.phase) * flake.swayAmount;
+      flake.x += (flake.vx + swayVelocity) * deltaSeconds;
+      flake.y += flake.vy * deltaSeconds;
+
+      if (flake.y > height + overscan) {
+        respawnFlake(flake);
+      } else if (flake.x < -overscan) {
+        flake.x = width + overscan;
+      } else if (flake.x > width + overscan) {
+        flake.x = -overscan;
       }
-    } else if (animationFrame) {
-      cancelAnimationFrame(animationFrame);
-      animationFrame = null;
     }
-  });
 
-  const handleVisibilityChange = () => {
+    drawFrame();
+    frameHandle = requestAnimationFrame(tick);
+  }
+
+  function startLoop() {
+    if (frameHandle !== 0) return;
+    lastFrameTime = 0;
+    frameHandle = requestAnimationFrame(tick);
+  }
+
+  function stopLoop() {
+    if (frameHandle === 0) return;
+    cancelAnimationFrame(frameHandle);
+    frameHandle = 0;
+  }
+
+  function handleVisibilityChange() {
     isPageVisible = document.visibilityState === "visible";
     if (isPageVisible) {
-      if (isVisible && !animationFrame) {
-        lastFrameTime = 0;
-        animationFrame = requestAnimationFrame(animate);
-      }
-    } else if (animationFrame) {
-      cancelAnimationFrame(animationFrame);
-      animationFrame = null;
+      startLoop();
+    } else {
+      stopLoop();
     }
-  };
+  }
 
-  window.addEventListener("resize", handleResize);
+  const resizeObserver = new ResizeObserver(scheduleCanvasResize);
+  resizeObserver.observe(container);
+
+  applyCanvasSize();
+  drawFrame();
+
   document.addEventListener("visibilitychange", handleVisibilityChange);
-  observer.observe(container);
   handleVisibilityChange();
 
   return () => {
-    if (animationFrame) cancelAnimationFrame(animationFrame);
-    observer.disconnect();
-    window.removeEventListener("resize", handleResize);
+    stopLoop();
+    resizeObserver.disconnect();
+    if (resizeRaf !== 0) cancelAnimationFrame(resizeRaf);
     document.removeEventListener("visibilitychange", handleVisibilityChange);
-    if (resizeTimeout) clearTimeout(resizeTimeout);
-    if (container.contains(renderer.domElement)) {
-      container.removeChild(renderer.domElement);
+    if (container.contains(canvas)) {
+      container.removeChild(canvas);
     }
-    renderer.dispose();
-    geometry.dispose();
-    material.dispose();
   };
 }

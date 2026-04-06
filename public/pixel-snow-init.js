@@ -71,6 +71,9 @@ function getSnowProfile() {
   };
 }
 
+/** Previously `opacity-[0.3]` on the layer; bake in so the canvas is not in a semi-transparent composited layer. */
+const SNOW_LAYER_OPACITY = 0.3;
+
 function clearPendingInit() {
   if (idleHandle !== null && typeof window.cancelIdleCallback === "function") {
     window.cancelIdleCallback(idleHandle);
@@ -98,17 +101,15 @@ function startSnow() {
         color: "#dce4ee",
         variant: "square",
         pixelResolution: profile.pixelResolution,
-        maxFps: 60,
         speed: 1.2,
         density: profile.density,
         flakeSize: 0.01,
-        brightness: profile.brightness,
+        brightness: profile.brightness * SNOW_LAYER_OPACITY,
         depthFade: 8,
         farPlane: profile.farPlane,
         direction: 125,
         maxFlakeSize: profile.maxFlakeSize,
         timeOffset: 12,
-        startupFadeMs: 480,
       });
 
       cleanup = typeof nextCleanup === "function" ? nextCleanup : function () {};
