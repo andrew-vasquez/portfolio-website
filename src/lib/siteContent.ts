@@ -37,6 +37,7 @@ export const stackGroups = [
     items: [
       { name: "Node.js", image: "/icons/nodejs.svg" },
       { name: "Hono", image: "/icons/hono.svg" },
+      { name: "FastAPI", image: "/icons/fastapi.svg" },
       { name: "Prisma", image: "/icons/prisma.svg" },
       { name: "PostgreSQL", image: "/icons/postgresql.svg" },
       { name: "Python", image: "/icons/python.svg" },
