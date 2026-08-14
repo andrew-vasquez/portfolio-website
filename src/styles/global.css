@@ -2,6 +2,22 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@custom-variant hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @slot;
+    }
+  }
+}
+
+@custom-variant group-hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:is(:where(.group):hover *) {
+      @slot;
+    }
+  }
+}
+
 :root {
   --radius: 1rem;
   --font-body: "IBM Plex Sans";
@@ -131,7 +147,6 @@
   font-size: 0.75rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  transition: top 0.2s ease;
 }
 
 .skip-link:focus-visible {
@@ -189,17 +204,41 @@
   background: var(--surface-soft);
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-deep);
+}
+
+.glass {
+  background: rgba(11, 13, 16, 0.72);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+.project-card {
   transition:
     transform 220ms cubic-bezier(0.22, 0.61, 0.36, 1),
     border-color 220ms cubic-bezier(0.22, 0.61, 0.36, 1),
     background-color 220ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.surface-card:hover,
-.surface-card:focus-within {
+.project-card:focus-within {
   transform: translateY(-4px);
   border-color: var(--border-strong);
   background: var(--surface-hover);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+    background: var(--surface-hover);
+  }
 }
 
 .eyebrow {
@@ -265,19 +304,31 @@
 .button-secondary,
 .icon-link {
   transition:
-    transform 220ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 160ms cubic-bezier(0.22, 0.61, 0.36, 1),
     border-color 220ms cubic-bezier(0.22, 0.61, 0.36, 1),
     background-color 220ms cubic-bezier(0.22, 0.61, 0.36, 1),
     color 220ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.button-primary:hover,
 .button-primary:focus-visible,
-.button-secondary:hover,
 .button-secondary:focus-visible,
-.icon-link:hover,
 .icon-link:focus-visible {
   transform: translateY(-2px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button-primary:hover,
+  .button-secondary:hover,
+  .icon-link:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.button-primary:active,
+.button-secondary:active,
+.icon-link:active {
+  transform: scale(0.97);
+  transition: transform 120ms ease-out;
 }
 
 .below-fold-section {
@@ -288,20 +339,17 @@
 
 .motion-item {
   opacity: 0;
-  transform: translateY(16px);
-  filter: blur(10px);
+  transform: translateY(12px);
   transition:
     opacity 460ms cubic-bezier(0.22, 0.61, 0.36, 1),
-    transform 620ms cubic-bezier(0.22, 0.61, 0.36, 1),
-    filter 620ms cubic-bezier(0.22, 0.61, 0.36, 1);
+    transform 620ms cubic-bezier(0.22, 0.61, 0.36, 1);
   transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, transform, filter;
+  will-change: opacity, transform;
 }
 
 .motion-item.is-visible {
   opacity: 1;
   transform: translateY(0);
-  filter: blur(0);
 }
 
 .hero-word {
@@ -324,10 +372,6 @@
 }
 
 @media (max-width: 767px) {
-  .motion-item {
-    filter: blur(4px);
-  }
-
   .hero-word {
     filter: blur(4px);
   }
@@ -338,7 +382,7 @@
     scroll-behavior: auto;
   }
 
-  .surface-card,
+  .project-card,
   .button-primary,
   .button-secondary,
   .icon-link,
@@ -348,8 +392,8 @@
     animation: none;
   }
 
-  .surface-card:hover,
-  .surface-card:focus-within,
+  .project-card:hover,
+  .project-card:focus-within,
   .button-primary:hover,
   .button-primary:focus-visible,
   .button-secondary:hover,
