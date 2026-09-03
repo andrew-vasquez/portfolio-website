@@ -1,0 +1,220 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - link "Skip to main content" [ref=e3] [cursor=pointer]:
+      - /url: "#main-content"
+    - generic [ref=e4]:
+      - banner [ref=e5]:
+        - generic [ref=e6]:
+          - generic [ref=e7]:
+            - img "Andrew Vasquez initials" [ref=e9]
+            - generic [ref=e10]:
+              - paragraph [ref=e11]: Andrew Vasquez
+              - paragraph [ref=e12]: Software Engineer
+          - generic [ref=e13]:
+            - link "View Andrew Vasquez on GitHub" [ref=e14] [cursor=pointer]:
+              - /url: https://github.com/andrew-vasquez
+            - link "View Andrew Vasquez on LinkedIn" [ref=e15] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/andrew-vasquez-000434237/
+            - link "Email Me" [ref=e16] [cursor=pointer]:
+              - /url: mailto:avasdev98@gmail.com
+      - main [ref=e19]:
+        - generic [ref=e20]:
+          - paragraph [ref=e22]: Andrew Vasquez | Software Engineer
+          - generic [ref=e23]:
+            - generic [ref=e24]:
+              - generic [ref=e25]: I
+              - generic [ref=e26]: build
+              - generic [ref=e27]: clean,
+              - generic [ref=e28]: fast
+            - generic [ref=e29]:
+              - generic [ref=e30]: scalable
+              - generic [ref=e31]: applications.
+          - paragraph [ref=e33]: Software engineer building with React, Next.js, TypeScript, and modern web tooling.
+          - generic [ref=e34]:
+            - link "View Featured Work" [ref=e35] [cursor=pointer]:
+              - /url: "#featured-work"
+            - link "Email Me" [ref=e39] [cursor=pointer]:
+              - /url: mailto:avasdev98@gmail.com
+          - generic [ref=e43]:
+            - generic [ref=e44]: Product-focused software engineer
+            - generic [ref=e45]: React, Next.js, TypeScript
+            - generic [ref=e46]: Open to frontend, full-stack, or backend roles
+          - generic [ref=e47]:
+            - generic [ref=e48]:
+              - generic [ref=e49]:
+                - img "Preview of Ciudadano" [ref=e56]
+                - generic [ref=e57]:
+                  - paragraph [ref=e59]: Highlights
+                  - generic [ref=e60]:
+                    - generic [ref=e61]: Built in direct collaboration with the municipal government of Matamoros around a real public-service workflow.
+                    - generic [ref=e62]: Uses geospatial data and location-aware reporting to improve issue accuracy and response visibility.
+                    - generic [ref=e63]: Architected to scale beyond one city into a broader civic platform for municipalities across Mexico.
+              - generic [ref=e64]:
+                - paragraph [ref=e65]: Featured Work
+                - heading "Ciudadano" [level=2] [ref=e66]
+                - paragraph [ref=e67]: A civic platform designed to give residents a real voice on local issues while giving government teams clearer visibility into what needs attention. It combines mobile reporting, geospatial data, and operational tooling to turn infrastructure failures and public safety incidents into trackable, actionable signals at city scale.
+                - generic [ref=e69]:
+                  - paragraph [ref=e70]: Role
+                  - paragraph [ref=e71]: Full-stack design and implementation across mobile, backend, and infrastructure.
+                - generic [ref=e72]:
+                  - paragraph [ref=e73]: Stack
+                  - generic [ref=e74]:
+                    - generic [ref=e75]: Expo React Native
+                    - generic [ref=e76]: Next.js
+                    - generic [ref=e77]: TypeScript
+                    - generic [ref=e78]: tRPC
+                    - generic [ref=e79]: PostgreSQL/PostGIS
+                    - generic [ref=e80]: Drizzle ORM
+                    - generic [ref=e81]: Supabase Realtime
+                    - generic [ref=e82]: BullMQ
+                    - generic [ref=e83]: Upstash Redis
+                    - generic [ref=e84]: Cloudflare R2
+                    - generic [ref=e85]: Turborepo
+                - link "Open Project" [ref=e87] [cursor=pointer]:
+                  - /url: https://www.ciudadano.app/
+            - generic [ref=e91]:
+              - paragraph [ref=e92]: Skills
+              - heading "Frontend, backend, and tools." [level=2] [ref=e93]
+            - generic [ref=e94]:
+              - article [ref=e95]:
+                - paragraph [ref=e96]: Frontend
+                - generic [ref=e97]:
+                  - generic [ref=e98]:
+                    - img "HTML" [ref=e99]
+                    - generic [ref=e100]: HTML
+                  - generic [ref=e101]:
+                    - img "CSS" [ref=e102]
+                    - generic [ref=e103]: CSS
+                  - generic [ref=e104]:
+                    - img "Next.js" [ref=e105]
+                    - generic [ref=e106]: Next.js
+                  - generic [ref=e107]:
+                    - img "JavaScript" [ref=e108]
+                    - generic [ref=e109]: JavaScript
+                  - generic [ref=e110]:
+                    - img "React" [ref=e111]
+                    - generic [ref=e112]: React
+                  - generic [ref=e113]:
+                    - img "TypeScript" [ref=e114]
+                    - generic [ref=e115]: TypeScript
+                  - generic [ref=e116]:
+                    - img "Astro" [ref=e117]
+                    - generic [ref=e118]: Astro
+                  - generic [ref=e119]:
+                    - img "Tailwind" [ref=e120]
+                    - generic [ref=e121]: Tailwind
+              - article [ref=e122]:
+                - paragraph [ref=e123]: Backend
+                - generic [ref=e124]:
+                  - generic [ref=e125]:
+                    - img "Node.js" [ref=e126]
+                    - generic [ref=e127]: Node.js
+                  - generic [ref=e128]:
+                    - img "Hono" [ref=e129]
+                    - generic [ref=e130]: Hono
+                  - generic [ref=e131]:
+                    - img "FastAPI" [ref=e132]
+                    - generic [ref=e133]: FastAPI
+                  - generic [ref=e134]:
+                    - img "Prisma" [ref=e135]
+                    - generic [ref=e136]: Prisma
+                  - generic [ref=e137]:
+                    - img "PostgreSQL" [ref=e138]
+                    - generic [ref=e139]: PostgreSQL
+                  - generic [ref=e140]:
+                    - img "Python" [ref=e141]
+                    - generic [ref=e142]: Python
+              - article [ref=e143]:
+                - paragraph [ref=e144]: Workflow
+                - generic [ref=e145]:
+                  - generic [ref=e146]:
+                    - img "Git" [ref=e147]
+                    - generic [ref=e148]: Git
+                  - generic [ref=e149]:
+                    - img "GitHub" [ref=e150]
+                    - generic [ref=e151]: GitHub
+                  - generic [ref=e152]:
+                    - img "VSCode" [ref=e153]
+                    - generic [ref=e154]: VSCode
+        - generic [ref=e155]:
+          - generic [ref=e156]:
+            - paragraph [ref=e157]: Projects
+            - heading "More projects" [level=2] [ref=e158]
+            - paragraph [ref=e159]: A few other things I have built.
+          - generic [ref=e160]:
+            - article [ref=e161]:
+              - img "Preview of Plexus" [ref=e169]
+              - generic [ref=e170]:
+                - generic [ref=e171]:
+                  - generic [ref=e172]:
+                    - paragraph [ref=e173]: AI Tooling
+                    - heading "Plexus" [level=3] [ref=e174]
+                  - link "Open Plexus" [ref=e175] [cursor=pointer]:
+                    - /url: https://plexus-sandy.vercel.app/
+                - paragraph [ref=e178]: A browser-based transcription workflow built for guitarists who need speed without sacrificing usability. It combines source separation, note detection, and tab rendering into a single product flow that moves from raw audio to playable output fast enough to fit real practice and production workflows.
+                - generic [ref=e179]:
+                  - paragraph [ref=e180]: Role
+                  - paragraph [ref=e181]: Full-stack implementation and ML pipeline integration.
+                - generic [ref=e182]:
+                  - generic [ref=e183]: Next.js
+                  - generic [ref=e184]: FastAPI
+                  - generic [ref=e185]: Demucs
+                  - generic [ref=e186]: Basic Pitch
+                  - generic [ref=e187]: AlphaTab
+                  - generic [ref=e188]: Modal.com
+            - article [ref=e189]:
+              - img "Preview of SlateDex" [ref=e197]
+              - generic [ref=e198]:
+                - generic [ref=e199]:
+                  - generic [ref=e200]:
+                    - paragraph [ref=e201]: Full-Stack App
+                    - heading "SlateDex" [level=3] [ref=e202]
+                  - link "Open SlateDex" [ref=e203] [cursor=pointer]:
+                    - /url: https://slatedex.vercel.app/
+                - paragraph [ref=e206]: A productized Pokemon team builder that turns a niche workflow into a polished full-stack experience. It combines structured team planning, authenticated saves, and clear matchup feedback inside a UI designed to stay calm even when the data gets dense.
+                - generic [ref=e207]:
+                  - paragraph [ref=e208]: Role
+                  - paragraph [ref=e209]: Product design, frontend systems, and full-stack implementation.
+                - generic [ref=e210]:
+                  - generic [ref=e211]: TanStack Start
+                  - generic [ref=e212]: React 19
+                  - generic [ref=e213]: TypeScript
+                  - generic [ref=e214]: Tailwind CSS v4
+                  - generic [ref=e215]: Hono
+                  - generic [ref=e216]: Prisma
+                  - generic [ref=e217]: PostgreSQL
+                  - generic [ref=e218]: Better Auth
+            - article [ref=e219]:
+              - img "Preview of DaylyBread" [ref=e227]
+              - generic [ref=e228]:
+                - generic [ref=e229]:
+                  - generic [ref=e230]:
+                    - paragraph [ref=e231]: Commerce Build
+                    - heading "DaylyBread" [level=3] [ref=e232]
+                  - link "Open DaylyBread" [ref=e233] [cursor=pointer]:
+                    - /url: https://daylybread.com
+                - paragraph [ref=e236]: A focused commerce experience built to explain a physical product clearly, create trust quickly, and move visitors toward action without unnecessary friction.
+                - generic [ref=e237]:
+                  - paragraph [ref=e238]: Role
+                  - paragraph [ref=e239]: Frontend implementation and conversion-focused landing page design.
+                - generic [ref=e240]:
+                  - generic [ref=e241]: Next.js
+                  - generic [ref=e242]: TypeScript
+                  - generic [ref=e243]: Tailwind CSS
+        - generic [ref=e245]:
+          - generic [ref=e246]:
+            - paragraph [ref=e247]: Contact
+            - heading "Get in touch" [level=2] [ref=e248]
+            - paragraph [ref=e249]: Interested in frontend, full-stack, and product-focused roles.
+          - generic [ref=e250]:
+            - link "Start A Conversation" [ref=e251] [cursor=pointer]:
+              - /url: mailto:avasdev98@gmail.com
+            - link "View GitHub" [ref=e255] [cursor=pointer]:
+              - /url: https://github.com/andrew-vasquez
+      - contentinfo [ref=e259]:
+        - paragraph [ref=e261]: © 2026 Andrew Vasquez
+  - generic [ref=e264]:
+    - button [ref=e265]
+    - button [ref=e271]
+    - button [ref=e275]
+    - button [ref=e280]

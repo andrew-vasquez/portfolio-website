@@ -123,6 +123,10 @@ function initPixelSnow() {
   cleanup();
   clearPendingInit();
 
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+
   function kickoff() {
     loadTimer = window.setTimeout(function () {
       startSnow();
@@ -151,5 +155,16 @@ initPixelSnow();
 
 if (!initialized) {
   window.addEventListener("astro:after-swap", initPixelSnow);
+  const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (typeof motionQuery.addEventListener === "function") {
+    motionQuery.addEventListener("change", function (e) {
+      if (e.matches) {
+        cleanup();
+        clearPendingInit();
+      } else {
+        initPixelSnow();
+      }
+    });
+  }
   initialized = true;
 }
