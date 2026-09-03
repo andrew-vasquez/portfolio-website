@@ -6,6 +6,9 @@ let loadTimer = null;
 
 function getSnowProfile() {
   const isMobile = window.matchMedia("(max-width: 767px)").matches;
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
   const hardwareConcurrency =
     navigator.hardwareConcurrency == null ? 4 : navigator.hardwareConcurrency;
   const reportedDeviceMemory = Reflect.get(navigator, "deviceMemory");
@@ -14,6 +17,16 @@ function getSnowProfile() {
   const lowPower = hardwareConcurrency <= 4 || deviceMemory <= 4;
   const highPowerDesktop =
     !isMobile && hardwareConcurrency >= 8 && deviceMemory >= 8;
+
+  if (prefersReducedMotion) {
+    return {
+      pixelResolution: isMobile ? 170 : 300,
+      density: isMobile ? 0.14 : 0.16,
+      farPlane: isMobile ? 14 : 16,
+      brightness: 0.72,
+      maxFlakeSize: isMobile ? 0.011 : 0.012,
+    };
+  }
 
   if (isMobile) {
     return lowPower
@@ -81,10 +94,6 @@ function startSnow() {
 
   const element = document.querySelector("[data-pixel-snow]");
   if (!element) return;
-
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    return;
-  }
 
   import("./pixelSnow.js").then(function (mod) {
     const profile = getSnowProfile();

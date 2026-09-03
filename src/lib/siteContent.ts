@@ -12,8 +12,8 @@ export const heroContent = {
     href: "mailto:avasdev98@gmail.com",
   },
   meta: [
-    "4 projects shipped end-to-end",
-    "Mobile, web, backend, and infrastructure",
+    "Product-focused software engineer",
+    "React, Next.js, TypeScript",
     "Open to frontend, full-stack, or backend roles",
   ],
 };
