@@ -121,6 +121,9 @@ importers:
       astro:
         specifier: 7.2.2
         version: 7.2.2(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@types/node@22.20.4)(@vercel/functions@3.9.8)(jiti@2.7.0)(yaml@2.9.1)
+      sharp:
+        specifier: ^0.35.4
+        version: 0.35.4(@types/node@22.20.4)
       tailwindcss:
         specifier: ^4.0.14
         version: 4.3.3
