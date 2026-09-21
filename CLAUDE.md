@@ -4,10 +4,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-- `bun dev` — Start dev server with Turbopack (Next.js 16)
-- `bun run build` — Production build
-- `bun run start` — Serve production build
-- `bun run lint` — Run ESLint on the project (via `eslint .`)
+- `pnpm dev` — Start the Astro dev server
+- `pnpm build` — Production build
+- `pnpm start` — Serve production build
+- `pnpm lint` — Run ESLint on the project (via `eslint .`)
 - No test framework is configured
 
 ## Architecture
@@ -36,7 +36,7 @@ Every component uses `"use client"` — the entire page is animation-heavy (Moti
 - **Path alias**: `@/*` maps to project root (e.g., `@/components/About`, `@/lib/animations`)
 - **CSS**: Tailwind CSS v4 via `@tailwindcss/postcss`. Custom CSS classes in `globals.css` for animation performance (`motion-element`, `navbar-icon`, `below-fold-section` with `content-visibility: auto`, etc.) and `prefers-reduced-motion` support.
 - **Images**: Uses `next/image` throughout. SVG icons in `/public/icons/`, project screenshots in `/public/projects/`.
-- **Package manager**: Bun (`bun.lock`)
+- **Package manager**: pnpm (`pnpm-lock.yaml`)
 
 ### Performance Optimizations Already Applied
 

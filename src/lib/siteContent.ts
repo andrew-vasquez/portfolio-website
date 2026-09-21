@@ -1,5 +1,4 @@
 export const heroContent = {
-  pill: "Available for Frontend & Full-Stack Roles",
   lines: ["I build clean, fast", "scalable applications."],
   description:
     "Software engineer building with React, Next.js, TypeScript, and modern web tooling.",
@@ -8,13 +7,12 @@ export const heroContent = {
     href: "#featured-work",
   },
   secondaryCta: {
-    label: "Get in Touch",
+    label: "Email Me",
     href: "mailto:avasdev98@gmail.com",
   },
   meta: [
     "4 projects shipped end-to-end",
     "Mobile, web, backend, and infrastructure",
-    "Open to frontend, full-stack, or backend roles",
   ],
 };
 
@@ -54,7 +52,6 @@ export const stackGroups = [
 ];
 
 export const contactContent = {
-  label: "Contact",
   title: "Get in touch",
   description: "Interested in frontend, full-stack, and product-focused roles.",
 };

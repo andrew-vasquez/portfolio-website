@@ -2,9 +2,9 @@
 
 ## Commands
 
-- `bun dev` — Start dev server with Turbopack
-- `bun run build` — Production build
-- `bun run lint` — ESLint (`eslint .`)
+- `pnpm dev` — Start the Astro dev server
+- `pnpm build` — Production build
+- `pnpm lint` — ESLint (`eslint .`)
 - No test framework is configured
 
 ## Architecture
@@ -37,7 +37,7 @@ app/layout.tsx → app/page.tsx → components/HomeContent.tsx → all section c
 ### Styling
 
 - **Tailwind CSS v4** via `@tailwindcss/postcss`.
-- **shadcn/ui** (New York style) is configured — add components with `bunx shadcn@latest add <component>`.
+- **shadcn/ui** (New York style) is configured — add components with `pnpm dlx shadcn@latest add <component>`.
 - Dark theme is always active (`<html class="dark">`), background `#0a0a0f`.
 - Font: Lora (serif) loaded via `next/font/google`.
 
@@ -55,4 +55,4 @@ These optimizations are already in place — preserve them when making changes:
 
 - Path alias: `@/*` maps to project root.
 - Images: use `next/image`. SVG icons in `/public/icons/`, project screenshots in `/public/projects/`.
-- Package manager: **Bun** (`bun.lock`).
+- Package manager: **pnpm** (`pnpm-lock.yaml`).
